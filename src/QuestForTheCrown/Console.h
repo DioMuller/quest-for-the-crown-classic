@@ -60,33 +60,6 @@ void clrscr( WORD atributos  = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_R
 void gotoxy (int x, int y);
 
 /*----------------------------------------------------------------------------*\
-|   mostratexto                                                                |
-|                                                                              |
-|   Descrição:                                                                 |
-|       Mostra uma string em determinada posição da tela com cores diferentes. |
-|                                                                              |
-|   Parâmetros:                                                                |
-|       x -> coordenada horizontal.                                            |
-|		y -> coordenada vertical.									 		   |
-|       texto -> texto a ser mostrado                                          |
-|       atributos->qualquer combinação dos seguintes valores:                  |
-|					FOREGROUND_BLUE, FOREGROUND_GREEN, FOREGROUND_RED,		   |
-|                   FOREGROUND_YELLOW, FOREGROUND_CYAN, FOREGROUND_WHITE       |
-|					FOREGROUND_INTENSITY,									   |
-|					BACKGROUND_BLUE, BACKGROUND_GREEN, BACKGROUND_RED,		   |
-|                   BACKGROUND_WHITE, BACKGROUND_CYAN                          |
-|					BACKGROUND_INTENSITY									   |
-|                                                                              |
-|       Exemplos:                                                              |
-|         //Mostra a frase em letras amarelas e fundo branco                   |
-|         mostratexto(5,5,"Oi", FOREGROUND_YELLOW | BACKGROUND_WHITE);         |
-|                                                                              |
-|   Retorno:                                                                   |
-|                                                                              |
-\*----------------------------------------------------------------------------*/
-void mostratexto ( int x, int y, char *texto, WORD atributos );
-
-/*----------------------------------------------------------------------------*\
 |   mostrar                                                                    |
 |                                                                              |
 |   Descrição:                                                                 |
@@ -106,7 +79,7 @@ void mostratexto ( int x, int y, char *texto, WORD atributos );
 |                                                                              |
 |       Exemplos:                                                              |
 |         //Mostra a frase em letras amarelas e fundo branco                   |
-|         mostratexto(5,5,"Oi", FOREGROUND_YELLOW | BACKGROUND_WHITE);         |
+|         mostra(5,5,FOREGROUND_YELLOW | BACKGROUND_WHITE, "Oi");			   |
 |                                                                              |
 |   Retorno:                                                                   |
 |                                                                              |
@@ -122,7 +95,7 @@ void mostrar ( int x, int y, WORD atributos, char *texto );
 |   Parâmetros:                                                                |
 |       x -> coordenada horizontal.                                            |
 |		y -> coordenada vertical.									 		   |
-|       valor -> número a ser mostrado                                         |
+|       valor -> valor a ser mostrado                                          |
 |       atributos->qualquer combinação dos seguintes valores:                  |
 |					FOREGROUND_BLUE, FOREGROUND_GREEN, FOREGROUND_RED,		   |
 |                   FOREGROUND_YELLOW, FOREGROUND_CYAN, FOREGROUND_WHITE       |
@@ -133,7 +106,7 @@ void mostrar ( int x, int y, WORD atributos, char *texto );
 |                                                                              |
 |       Exemplos:                                                              |
 |         //Mostra a frase em letras amarelas e fundo branco                   |
-|         mostratexto(5,5,"Oi", FOREGROUND_YELLOW | BACKGROUND_WHITE);         |
+|         mostra(5,5,FOREGROUND_YELLOW | BACKGROUND_WHITE, 1234);			   |
 |                                                                              |
 |   Retorno:                                                                   |
 |                                                                              |
