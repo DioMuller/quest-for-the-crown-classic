@@ -34,6 +34,8 @@ void Enemy::Update(double gameTime)
 
 		_nextMovement = _moveCount;
 	}
+
+	GameManager::HitPlayer(_x,_y);
 }
 
 void Enemy::Draw()

@@ -18,30 +18,24 @@ class GameManager
 		double _currentTime;
 
 		//Game objects
-		std::list<Enemy> _enemies;
-		std::list<Enemy>::iterator _iterator;
-
-		Player _player;
-
-		//Debug attributes
-		#ifdef _DEBUG 
-		double _fpsLast;
-		int _currentFPS;
-		int _frameCount;
-		#endif
+		std::list<GameObject*> _objects;
+		std::list<GameObject*>::iterator _iterator;
+		
+		Player* _player;
 
 	public:
 		GameManager();
 		~GameManager();
 
 	public:
-		void UpdateGame();
-		void DrawGame();
+		static void UpdateGame();
+		static void DrawGame();
 
-		bool IsRunning();
-
-	public:
+		static bool IsRunning();
 		static WORD GetBackground();
-		static GameManager GetInstance();
+		static void TryHit(int x, int y);
+		static void HitPlayer(int x, int y);
+
+		static void EndGame();
 };
 

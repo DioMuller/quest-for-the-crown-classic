@@ -5,24 +5,17 @@ GameManager instance;
 
 GameManager::GameManager()
 {
-	_player = Player(10,10);
+	_player = new Player(10,10);
 
 	_background = BACKGROUND_GREEN;
 
-	_enemies.push_back(Enemy(15, 15, 15));
-	_enemies.push_back(Enemy(12, 19, 15));
-	_enemies.push_back(Enemy(70, 5, 15));
-	_enemies.push_back(Enemy(2, 2, 15));
-	_enemies.push_back(Enemy(49, 21, 15));
-	_enemies.push_back(Enemy(5, 20, 15));
-	_enemies.push_back(Enemy(15, 23, 15));
-
-	//Debug Valiables
-	#ifdef _DEBUG 
-	_fpsLast = current_time();
-	_currentFPS = 0;
-	_frameCount = 0;
-	#endif
+	_objects.push_back(new Enemy(15, 15, 15));
+	_objects.push_back(new Enemy(12, 19, 15));
+	_objects.push_back(new Enemy(70, 5, 15));
+	_objects.push_back(new Enemy(2, 2, 15));
+	_objects.push_back(new Enemy(49, 21, 15));
+	_objects.push_back(new Enemy(5, 20, 15));
+	_objects.push_back(new Enemy(15, 23, 15));
 
 	_isRunning = true;
 	_initialized = true;
@@ -30,64 +23,80 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	//Nothing else to do.
+	//Delete all elements from objects?
 }
 
 void GameManager::UpdateGame()
 {
-		_currentTime = current_time();
+		instance._currentTime = current_time();
 
 		//For each Game Object -> Update
-		_player.Update(_currentTime);
+		instance._player->Update(instance._currentTime);
 
-		for( _iterator = _enemies.begin(); _iterator != _enemies.end(); _iterator++  )
+		for( instance._iterator = instance._objects.begin(); instance._iterator != instance._objects.end(); instance._iterator++  )
 		{
-			(*_iterator).Update(_currentTime);
+			(*instance._iterator)->Update(instance._currentTime);
 		}
-
-		//Show debug options
-		#ifdef _DEBUG
-		_currentTime = current_time();
-
-		if( _currentTime - _fpsLast > 1000.0 )
-		{
-			_fpsLast = _currentTime;
-			_currentFPS = _frameCount;
-			_frameCount = 0;
-		}
-
-		_frameCount++;
-		#endif
 }
 
 void GameManager::DrawGame()
 {
 		//Clear Screen
-		clrscr(_background);
+		clrscr(instance._background);
 
 		//For each Game Object -> Draw
-		_player.Draw();
+		instance._player->Draw();
 
-		for( _iterator = _enemies.begin(); _iterator != _enemies.end(); _iterator++  )
+		for( instance._iterator = instance._objects.begin(); instance._iterator != instance._objects.end(); instance._iterator++  )
 		{
-			(*_iterator).Draw();
+			(*instance._iterator)->Draw();
 		}
 		
-		//Draw debug data the GUI
-		#ifdef _DEBUG
-		mostrar ( 70, 0, FOREGROUND_WHITE, "DEBUG MODE" );
-		mostrar ( 70, 1, FOREGROUND_WHITE, "FPS: " );
-		mostrar ( 75, 1, FOREGROUND_WHITE, (long) _currentFPS );
-		#endif
-
 		//Draw GUI Bar
-		mostrar(0,0,FOREGROUND_WHITE, "                                                                                ");
+		mostrar(0,0,FOREGROUND_WHITE, "Life                                                                            ");
 		mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
+		
+		for( int i = 0; i < instance._player->GetTotalHealth(); i++ )
+		{
+			WORD color = instance._player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
+			mostrar( 6 + i, 0, color, "@");
+		}
+}
+
+void GameManager::TryHit(int x, int y)
+{
+  	std::list<Enemy*> toRemove;
+
+	for( instance._iterator = instance._objects.begin(); instance._iterator != instance._objects.end(); instance._iterator++  )
+	{
+		Enemy* obj = (Enemy*) (*instance._iterator);
+
+		if( obj != NULL )
+		{
+			if( obj->CollidesWith(x,y) )
+			{
+				toRemove.push_back(obj);
+			}
+		}
+	}
+
+	for( std::list<Enemy*>::iterator iterator = toRemove.begin(); iterator != toRemove.end(); iterator++ )
+	{
+		instance._objects.remove((*iterator));
+	}
+}
+
+void GameManager::HitPlayer(int x, int y)
+{
+	if( instance._player->CollidesWith(x,y) )
+	{
+		instance._player->Hit();
+	}
 }
 
 bool GameManager::IsRunning()
 {
-	return _initialized && _isRunning;
+	return instance._initialized && instance._isRunning;
 }
 
 WORD GameManager::GetBackground()
@@ -95,7 +104,7 @@ WORD GameManager::GetBackground()
 	return instance._background;
 }
 
-GameManager GameManager::GetInstance()
+void GameManager::EndGame()
 {
-	return (instance);
+	instance._isRunning = false;
 }

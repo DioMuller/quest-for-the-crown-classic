@@ -4,12 +4,10 @@
 
 int main(int argc, char **argv)
 {
-	GameManager manager = GameManager::GetInstance();
-
-	while( manager.IsRunning() )
+	while( GameManager::IsRunning() )
 	{	
-		manager.UpdateGame();
-		manager.DrawGame();
+		GameManager::UpdateGame();
+		GameManager::DrawGame();
 
 		Sleep(17);
 	}

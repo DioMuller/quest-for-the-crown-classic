@@ -14,4 +14,6 @@ class GameObject
 	public:
 		virtual void Update(double gameTime);
 		virtual void Draw();
+
+		bool CollidesWith(int x, int y);
 };

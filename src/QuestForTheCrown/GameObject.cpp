@@ -13,3 +13,8 @@ GameObject::~GameObject()
 
 void GameObject::Update(double gameTime){}
 void GameObject::Draw(){}
+
+bool GameObject::CollidesWith(int x, int y)
+{
+	return (_x == x) && (_y == y);
+}
