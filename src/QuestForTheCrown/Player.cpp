@@ -20,5 +20,5 @@ void Player::Update(double gameTime)
 
 void Player::Draw()
 {
-	mostrar(_x, _y, BACKGROUND_GREEN | FOREGROUND_WHITE | FOREGROUND_INTENSITY, "@");
+	mostrar(_x, _y, BACKGROUND_CYAN | FOREGROUND_WHITE | FOREGROUND_INTENSITY, "@");
 }

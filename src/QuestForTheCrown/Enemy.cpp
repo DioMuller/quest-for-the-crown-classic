@@ -33,9 +33,9 @@ void Enemy::Draw()
 	if( _lastX != _x && _lastY != _y )
 	{
 		//Clean up last position
-		if( _lastX != -1 ) mostrar(_lastX, _lastY, BACKGROUND_GREEN, " ");
+		if( _lastX != -1 ) mostrar(_lastX, _lastY, BACKGROUND_CYAN, " ");
 
 		//Draw new position
-		mostrar(_x, _y, FOREGROUND_RED | BACKGROUND_GREEN, "o");
+		mostrar(_x, _y, FOREGROUND_RED | BACKGROUND_CYAN, "o");
 	}
 }

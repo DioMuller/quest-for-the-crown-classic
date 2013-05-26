@@ -19,11 +19,13 @@ int main(int argc, char **argv)
 	//Game FPS
 	const double FPS = 60.0;
 	const double INTERVAL = 1000.0 / FPS;
-	const int IGNORED_FRAMES = 2;
 
 	//Screen size: 80 x 25
 	const int WIDTH = 80;
 	const int HEIGHT = 25;
+
+	//Time variables
+	double currentTime;
 
 	//Game objects
 	std::list<Enemy> enemies;
@@ -39,15 +41,12 @@ int main(int argc, char **argv)
 	enemies.push_back(Enemy(5,20));
 	enemies.push_back(Enemy(15,23));
 
-	//Game Time
-	double lastTime = current_time();
-	double currentTime = current_time();
-
-#ifdef _DEBUG 
+	//Debug Valiables
+	#ifdef _DEBUG 
 	double fpsLast = current_time();
 	int currentFPS = 0;
 	int frameCount = 0;
-#endif
+	#endif
 
 	bool running = true;
 
@@ -59,36 +58,31 @@ int main(int argc, char **argv)
 	mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
 
 	while( running )
-	{
+	{	
 		currentTime = current_time();
-		int loops = 0;
 
-		while( lastTime + INTERVAL < currentTime && loops < IGNORED_FRAMES )
+		//For each Game Object -> Update
+		player.Update(currentTime);
+
+		for( iterator = enemies.begin(); iterator != enemies.end(); iterator++  )
 		{
-			//For each Game Object -> Update
-			player.Update(currentTime);
-
-			for( iterator = enemies.begin(); iterator != enemies.end(); iterator++  )
-			{
-				(*iterator).Update(currentTime);
-			}
-
-			lastTime += INTERVAL;
-			loops++;
-
-#ifdef _DEBUG  
-			if( currentTime - fpsLast > 1000.0 )
-			{
-				fpsLast = currentTime;
-				currentFPS = frameCount;
-				frameCount = 0;
-			}
-
-			frameCount++;
-#endif
+			(*iterator).Update(currentTime);
 		}
 
-		double interpolation = (lastTime + INTERVAL - currentTime) / 2;
+		//Show debug options
+		#ifdef _DEBUG
+		currentTime = current_time();
+
+		if( currentTime - fpsLast > 1000.0 )
+		{
+			fpsLast = currentTime;
+			currentFPS = frameCount;
+			frameCount = 0;
+		}
+
+		frameCount++;
+		#endif
+
 
 		//For each Game Object -> Draw
 		player.Draw();
@@ -98,12 +92,14 @@ int main(int argc, char **argv)
 			(*iterator).Draw();
 		}
 		
-		//Draw the GUI
-#ifdef _DEBUG
+		//Draw debug data the GUI
+		#ifdef _DEBUG
 		mostrar ( 70, 0, FOREGROUND_WHITE, "DEBUG MODE" );
-		mostrar ( 70, 1, FOREGROUND_WHITE, "FPS:   " );
-		mostrar ( 77, 1, FOREGROUND_WHITE, (long) currentFPS );
-#endif
+		mostrar ( 70, 1, FOREGROUND_WHITE, "FPS: " );
+		mostrar ( 75, 1, FOREGROUND_WHITE, (long) currentFPS );
+		#endif
+
+		Sleep((DWORD) INTERVAL + 1);
 	}
 
 	return 0;
