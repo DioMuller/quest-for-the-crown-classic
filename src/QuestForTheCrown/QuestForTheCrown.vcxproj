@@ -77,10 +77,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Console.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameMain.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
