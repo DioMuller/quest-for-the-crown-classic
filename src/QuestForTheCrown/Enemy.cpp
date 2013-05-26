@@ -4,11 +4,10 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy(int x, int y) : GameObject(x,y)
+Enemy::Enemy(int x, int y, int moveCount) : GameObject(x,y)
 {
-	_lastX = -1;
-	_lastY = -1;
-	//Nothing else to do.
+	_moveCount = moveCount;
+	_nextMovement = moveCount;
 }
 
 
@@ -19,23 +18,25 @@ Enemy::~Enemy()
 
 void Enemy::Update(double gameTime)
 {
-	_lastX = _x;
-	_lastY = _y;
+	_nextMovement--;
 
-	srand(clock());
+	if( _nextMovement <= 0 )
+	{
+		_x += (rand() % 4) - 2; //-1, 0, 1
+		_y += (rand() % 4) - 2; //-1, 0, 1
 
-	_x += (rand() % 3) - 2; //-1, 0, 1
-	_y += (rand() % 3) - 2; //-1, 0, 1
+		if( _x < 0 ) _x = 0;
+		if( _x > 79 ) _x = 79;
+
+		if( _y < 2 ) _y = 2;
+		if( _y > 24 ) _y = 24;
+
+		_nextMovement = _moveCount;
+	}
 }
 
 void Enemy::Draw()
 {
-	if( _lastX != _x && _lastY != _y )
-	{
-		//Clean up last position
-		if( _lastX != -1 ) mostrar(_lastX, _lastY, BACKGROUND_CYAN, " ");
-
-		//Draw new position
-		mostrar(_x, _y, FOREGROUND_RED | BACKGROUND_CYAN, "o");
-	}
+	//Draw new position
+	mostrar(_x, _y, FOREGROUND_RED | BACKGROUND_CYAN, "o");
 }

@@ -33,13 +33,13 @@ int main(int argc, char **argv)
 
 	Player player = Player(10,10);
 
-	enemies.push_back(Enemy(15,15));
-	enemies.push_back(Enemy(12,19));
-	enemies.push_back(Enemy(70,5));
-	enemies.push_back(Enemy(1,1));
-	enemies.push_back(Enemy(49,21));
-	enemies.push_back(Enemy(5,20));
-	enemies.push_back(Enemy(15,23));
+	enemies.push_back(Enemy(15, 15, 15));
+	enemies.push_back(Enemy(12, 19, 15));
+	enemies.push_back(Enemy(70, 5, 15));
+	enemies.push_back(Enemy(2, 2, 15));
+	enemies.push_back(Enemy(49, 21, 15));
+	enemies.push_back(Enemy(5, 20, 15));
+	enemies.push_back(Enemy(15, 23, 15));
 
 	//Debug Valiables
 	#ifdef _DEBUG 
@@ -50,15 +50,15 @@ int main(int argc, char **argv)
 
 	bool running = true;
 
-	//Clear Screen
-	clrscr(BACKGROUND_CYAN);
-
-	//Draw GUI Bar
-	mostrar(0,0,FOREGROUND_WHITE, "                                                                                ");
-	mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
-
 	while( running )
 	{	
+		//Clear Screen
+		clrscr(BACKGROUND_CYAN);
+
+		//Draw GUI Bar
+		mostrar(0,0,FOREGROUND_WHITE, "                                                                                ");
+		mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
+
 		currentTime = current_time();
 
 		//For each Game Object -> Update

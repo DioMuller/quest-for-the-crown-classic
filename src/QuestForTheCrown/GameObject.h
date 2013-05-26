@@ -1,5 +1,4 @@
-#ifndef __GAMEOBJECT_H__
-#define __GAMEOBJECT_H__
+#pragma once
 
 class GameObject
 {
@@ -16,4 +15,3 @@ class GameObject
 		virtual void Update(double gameTime);
 		virtual void Draw();
 };
-#endif

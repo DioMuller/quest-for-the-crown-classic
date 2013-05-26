@@ -2,11 +2,11 @@
 #include "gameobject.h"
 class Enemy : public GameObject
 {
-	private:
-		int _lastX;
-		int _lastY;
+	protected:
+		int _moveCount;
+		int _nextMovement;
 	public:
-		Enemy(int x, int y);
+		Enemy(int x, int y, int moveCount);
 		~Enemy();
 
 	public:
