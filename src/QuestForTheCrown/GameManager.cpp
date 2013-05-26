@@ -84,6 +84,8 @@ void GameManager::TryHit(int x, int y)
 	{
 		instance._objects.remove((*iterator));
 	}
+
+	if( instance._objects.empty() ) EndGame();
 }
 
 void GameManager::HitPlayer(int x, int y)

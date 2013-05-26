@@ -80,9 +80,11 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TitleScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp" />
@@ -90,8 +92,10 @@
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TitleScreen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
