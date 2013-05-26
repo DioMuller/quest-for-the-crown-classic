@@ -2,6 +2,7 @@
 #include <time.h>
 #include "Console.h"
 #include "Enemy.h"
+#include "GameManager.h"
 
 
 Enemy::Enemy(int x, int y, int moveCount) : GameObject(x,y)
@@ -38,5 +39,5 @@ void Enemy::Update(double gameTime)
 void Enemy::Draw()
 {
 	//Draw new position
-	mostrar(_x, _y, FOREGROUND_RED | BACKGROUND_CYAN, "o");
+	mostrar(_x, _y, FOREGROUND_RED | GameManager::GetBackground(), "o");
 }

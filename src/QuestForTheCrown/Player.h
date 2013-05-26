@@ -16,6 +16,7 @@ class Player : public GameObject
 		int _actionFrames;
 	public:
 		Player(int x, int y);
+		Player();
 		~Player();
 
 	public:

@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 #include "Console.h"
 #include "Input.h"
+#include "GameManager.h"
 
 
 Player::Player(int x, int y) : GameObject(x,y)
@@ -9,6 +10,11 @@ Player::Player(int x, int y) : GameObject(x,y)
 	_actionFrames = 0;
 }
 
+Player::Player() : GameObject(39,12)
+{
+	_direction = DOWN;
+	_actionFrames = 0;
+}
 
 Player::~Player()
 {
@@ -64,25 +70,25 @@ void Player::Draw()
 	WORD color = _actionFrames == 0 ? FOREGROUND_WHITE | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
 	int dist = _actionFrames == 0? 1 : 2;
 
-	mostrar(_x, _y, BACKGROUND_CYAN | FOREGROUND_WHITE | FOREGROUND_INTENSITY, "@");
+	mostrar(_x, _y, GameManager::GetBackground() | FOREGROUND_WHITE | FOREGROUND_INTENSITY, "@");
 
 	switch (_direction)
 	{
 		case UP:
-			if( _actionFrames > 0 ) mostrar(_x, _y - 1, BACKGROUND_CYAN | color, "I");
-			mostrar(_x, _y - dist, BACKGROUND_CYAN | color, "^");
+			if( _actionFrames > 0 ) mostrar(_x, _y - 1, GameManager::GetBackground() | color, "I");
+			mostrar(_x, _y - dist, GameManager::GetBackground() | color, "^");
 			break;
 		case DOWN:
-			if( _actionFrames > 0 ) mostrar(_x, _y + 1, BACKGROUND_CYAN | color, "I");
-			mostrar(_x, _y + dist, BACKGROUND_CYAN | color, "v");
+			if( _actionFrames > 0 ) mostrar(_x, _y + 1, GameManager::GetBackground() | color, "I");
+			mostrar(_x, _y + dist, GameManager::GetBackground() | color, "v");
 			break;
 		case LEFT:
-			if( _actionFrames > 0 ) mostrar(_x - 1, _y, BACKGROUND_CYAN | color, "-");
-			mostrar(_x - dist, _y, BACKGROUND_CYAN | color, "<");
+			if( _actionFrames > 0 ) mostrar(_x - 1, _y, GameManager::GetBackground() | color, "-");
+			mostrar(_x - dist, _y, GameManager::GetBackground() | color, "<");
 			break;
 		case RIGHT:
-			if( _actionFrames > 0 ) mostrar(_x + 1, _y, BACKGROUND_CYAN | color, "-");
-			mostrar(_x + dist, _y, BACKGROUND_CYAN | color, ">");
+			if( _actionFrames > 0 ) mostrar(_x + 1, _y, GameManager::GetBackground() | color, "-");
+			mostrar(_x + dist, _y, GameManager::GetBackground() | color, ">");
 			break;
 		default:
 			break;
