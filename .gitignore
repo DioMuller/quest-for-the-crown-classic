@@ -2,4 +2,6 @@ Release
 Debug
 *.dll
 *.exe
+*.sdf
+*.suo
 ~$*
