@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include <list>
+#include "Level.h"
 
 class GameManager
 {
@@ -11,16 +12,14 @@ class GameManager
 		bool _initialized;
 		bool _isRunning;
 
-		//Color variables
-		WORD _background;
-
 		//Time variables
 		double _currentTime;
 
-		//Game objects
-		std::list<GameObject*> _objects;
-		std::list<GameObject*>::iterator _iterator;
-		
+		//Levels
+		//TODO: Level Manager
+		Level* _level;
+
+		//Player Reference
 		Player* _player;
 
 	public:

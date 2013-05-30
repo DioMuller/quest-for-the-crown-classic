@@ -1,4 +1,5 @@
 #pragma once
+#include "Console.h"
 
 class GameObject
 {
@@ -7,6 +8,14 @@ class GameObject
 		int _x;
 		int _y;
 
+		int _old_x;
+		int _old_y;
+
+		bool _drawn;
+
+		char* _sprite;
+		WORD _color;
+
 	public:
 		GameObject(int x, int y);
 		~GameObject();
@@ -14,6 +23,7 @@ class GameObject
 	public:
 		virtual void Update(double gameTime);
 		virtual void Draw();
+		virtual void Clean();
 
 		bool CollidesWith(int x, int y);
 };

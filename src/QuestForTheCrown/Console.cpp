@@ -172,7 +172,7 @@ void mostrar ( int x, int y, WORD atributos, long valor )
 
 	//Monta string
 	char texto[10];
-	ltoa(valor, texto, 10);
+	_ltoa_s(valor, texto, 10);
 
 	//Imprime frase
 	WriteConsole (hConsole, texto, strlen(texto), &dChar, NULL);

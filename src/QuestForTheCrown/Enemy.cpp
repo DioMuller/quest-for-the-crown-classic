@@ -5,10 +5,35 @@
 #include "GameManager.h"
 
 
-Enemy::Enemy(int x, int y, int moveCount) : GameObject(x,y)
+Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 {
+	int moveCount = 0;
+	_type = type;
+
+	switch (_type)
+	{
+		case SLIME:
+			moveCount = 10;
+			break;
+		case GOON:
+			moveCount = 15;
+			break;
+		case WIZARD:
+			moveCount = 20;
+			break;
+		default:
+			break;
+	}
+
+	_color = FOREGROUND_RED;
+
+	_sprite = new char[2];
+	_sprite[0] = _type;
+	_sprite[1] = '\0';
+
 	_moveCount = moveCount;
 	_nextMovement = moveCount;
+
 }
 
 
@@ -36,10 +61,5 @@ void Enemy::Update(double gameTime)
 	}
 
 	GameManager::HitPlayer(_x,_y);
-}
-
-void Enemy::Draw()
-{
-	//Draw new position
-	mostrar(_x, _y, FOREGROUND_RED | GameManager::GetBackground(), "o");
+	GameObject::Update(gameTime);
 }

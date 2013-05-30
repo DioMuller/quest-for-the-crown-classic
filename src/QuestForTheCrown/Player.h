@@ -1,13 +1,6 @@
 #pragma once
 #include "gameobject.h"
-
-enum Direction
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-};
+#include "Enum.h"
 
 class Player : public GameObject
 {

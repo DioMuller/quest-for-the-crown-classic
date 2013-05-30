@@ -14,6 +14,8 @@
     <ProjectGuid>{99162AB8-565B-4E80-9F79-9DF4A457105E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>QuestForTheCrown</RootNamespace>
+    <ProjectName>
+    </ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,11 +80,13 @@
   <ItemGroup>
     <ClInclude Include="Console.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enum.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TitleScreen.h" />
   </ItemGroup>
@@ -94,6 +98,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Helpers.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
   </ItemGroup>

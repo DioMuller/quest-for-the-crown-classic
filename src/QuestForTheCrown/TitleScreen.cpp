@@ -35,4 +35,5 @@ void TitleScreen::Draw()
 
 	mostrar(30, 20, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to begin.");
 
+	gotoxy(0,0);
 }

@@ -92,15 +92,17 @@ void Player::Update(double gameTime)
 
 		_actionFrames--;
 	}
+
+	GameObject::Update(gameTime);
 }
 
 void Player::Draw()
 {
-	WORD playerColor = ((_invencibleTime <= 0) ? FOREGROUND_WHITE : FOREGROUND_YELLOW) | FOREGROUND_INTENSITY;
-	WORD color = _actionFrames == 0 ? FOREGROUND_WHITE : playerColor;
+	_color = ((_invencibleTime <= 0) ? FOREGROUND_WHITE : FOREGROUND_YELLOW) | FOREGROUND_INTENSITY;
+	WORD color = _actionFrames == 0 ? FOREGROUND_WHITE : _color;
 	int dist = _actionFrames == 0? 1 : 3;
 
-	mostrar(_x, _y, GameManager::GetBackground() | playerColor, "@");
+	mostrar(_x, _y, GameManager::GetBackground() | _color, "@");
 
 	switch (_direction)
 	{
