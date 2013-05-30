@@ -1,7 +1,7 @@
 ﻿#include "Level.h"
 
 
-Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], WORD background)
+Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background)
 {
 	_background = background;
 
@@ -33,6 +33,12 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], WORD background)
 		}
 	}
 
+	_neighbours[LEFT] = neighbours[LEFT];
+	_neighbours[UP] = neighbours[UP];
+	_neighbours[RIGHT] = neighbours[RIGHT];
+	_neighbours[DOWN] = neighbours[DOWN];
+
+
 	_redraw = true;
 }
 
@@ -46,7 +52,14 @@ void Level::Draw()
 	{
 		for( int i = 0; i < LEVEL_HEIGHT; i++ )
 		{
-			mostrar(0, i + 2, _background | FOREGROUND_WHITE, _level[i]);
+			if( _level[i][0] == '~' )
+			{
+				mostrar(0, i + 2, BACKGROUND_BLUE | BACKGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_INTENSITY, _level[i]);
+			}
+			else
+			{
+				mostrar(0, i + 2, _background | FOREGROUND_WHITE, _level[i]);
+			}
 		}
 
 		_redraw = false;
@@ -68,7 +81,7 @@ void Level::Update(double gameTime)
 
 bool Level::CheckXY(int x, int y)
 {
-	return _level[x][y] == ' ';
+	return _level[y-2][x] == ' ';
 }
 
 void Level::HitObjects(int x, int y)
@@ -97,4 +110,22 @@ void Level::HitObjects(int x, int y)
 int Level::GetNeighbour(Direction direction)
 {
 	return _neighbours[direction];
+}
+
+void Level::SetNeighbours(int north, int east, int south, int west)
+{
+	_neighbours[UP] = north;
+	_neighbours[RIGHT] = east;
+	_neighbours[DOWN] = south;
+	_neighbours[LEFT] = west;
+}
+
+void Level::ResetDraw()
+{
+	_redraw = true;
+}
+
+WORD Level::GetBackground()
+{
+	return _background;
 }

@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include <list>
-#include "Level.h"
+#include "LevelManager.h"
 
 class GameManager
 {
@@ -17,7 +17,7 @@ class GameManager
 
 		//Levels
 		//TODO: Level Manager
-		Level* _level;
+		LevelManager *_manager;
 
 		//Player Reference
 		Player* _player;
@@ -34,7 +34,8 @@ class GameManager
 		static WORD GetBackground();
 		static void TryHit(int x, int y);
 		static void HitPlayer(int x, int y);
-
+		static bool CanMoveTo(int x, int y);
+		static void ChangeLevel(Direction direction);
 		static void EndGame();
 };
 

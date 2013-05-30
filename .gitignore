@@ -3,5 +3,6 @@ Debug
 *.dll
 *.exe
 *.sdf
+*.opensdf
 *.suo
 ~$*

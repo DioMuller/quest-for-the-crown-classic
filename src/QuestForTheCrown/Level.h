@@ -17,7 +17,7 @@ private:
 	bool _redraw;
 
 public:
-	Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], WORD background);
+	Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background);
 	~Level();
 
 public:
@@ -27,5 +27,8 @@ public:
 	bool CheckXY(int x, int y);
 	void HitObjects(int x, int y);
 	int GetNeighbour(Direction direction);
+	void SetNeighbours(int north, int east, int south, int west);
+	void ResetDraw();
+	WORD GetBackground();
 };
 

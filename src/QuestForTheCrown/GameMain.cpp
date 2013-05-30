@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 		GameManager::UpdateGame();
 		GameManager::DrawGame();
 
-		Sleep(100);
+		Sleep(17);
 	}
 
 	//Game Over Loop

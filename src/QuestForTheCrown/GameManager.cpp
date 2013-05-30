@@ -7,34 +7,7 @@ GameManager::GameManager()
 {
 	_player = new Player(10,10);
 
-	//TODO: Initialize level manager here!
-	char level[23][81] = {
-		"###############################################################################",
-		"1                        ######################################################",
-		"1                                 #############################################",
-		"1                                         #####################################",
-		"1                                              ################################",
-		"1                 o                                     #######################",
-		"1                                                 o            ################",
-		"1                                                                     #########",
-		"1                                                                         #####",
-		"1                                o                                       ######",
-		"1           o                                                              ####",
-		"1                                                         o               #####",
-		"1                                                                         #####",
-		"1                                                                          ####",
-		"1                                                                         #####",
-		"1                                                  o                     ######",
-		"1                  o              o                                           3",
-		"1                                                                             3",
-		"1                                                             #################",
-		"1                                                   ###########################",
-		"1       ######################              ###################################",
-		"1    #############################      #######################################",
-		"####################################55#########################################"
-	};
-
-	_level = new Level(level, BACKGROUND_GREEN);
+	_manager = new LevelManager();
 
 	_isRunning = true;
 	_initialized = true;
@@ -53,8 +26,8 @@ void GameManager::UpdateGame()
 		//For each Game Object -> Update
 		instance._player->Update(instance._currentTime);
 
-		//TODO: UPDATE LEVEL
-		instance._level->Update(instance._currentTime);
+		//Updates Level
+		instance._manager->Update(instance._currentTime);
 }
 
 void GameManager::DrawGame()
@@ -63,7 +36,7 @@ void GameManager::DrawGame()
 		instance._player->Draw();
 
 		//TODO: DRAW LEVEL
-		instance._level->Draw();
+		instance._manager->Draw();
 		
 		//Draw GUI Bar
 		mostrar(0,0,FOREGROUND_WHITE, "Life                                                                            ");
@@ -91,16 +64,27 @@ bool GameManager::IsRunning()
 
 void GameManager::TryHit(int x, int y)
 {
-	//TODO: CHECK LEVEL HITS.
+	//TODO: CHECK LEVEL HITBOXES (ENEMIES)
 }
 
 WORD GameManager::GetBackground()
 {
-	//TODO: GET LEVEL BG COLOR
-	return BACKGROUND_GREEN;//instance._background;
+	return instance._manager->GetLevelBackground();
 }
 
 void GameManager::EndGame()
 {
 	instance._isRunning = false;
+}
+
+bool GameManager::CanMoveTo(int x, int y)
+{
+	if( x < 0 || x > 79 || y < 2 || y > 24 ) return false;
+
+	return instance._manager->CheckXY(x, y);
+}
+
+void GameManager::ChangeLevel(Direction direction)
+{
+	instance._manager->ChangeLevel(instance._player, direction);
 }

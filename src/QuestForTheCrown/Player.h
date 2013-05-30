@@ -1,11 +1,9 @@
 #pragma once
 #include "gameobject.h"
-#include "Enum.h"
 
 class Player : public GameObject
 {
 	private:
-		Direction _direction;
 		int _actionFrames;
 
 		int _currentHealth;
@@ -24,5 +22,8 @@ class Player : public GameObject
 		void Hit();
 		int GetTotalHealth();
 		int GetCurrentHealth();
+
+		void SetX( int pos );
+		void SetY( int pos );
 };
 

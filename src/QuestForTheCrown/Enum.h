@@ -3,10 +3,10 @@
 
 enum Direction
 {
-	UP = 0,
-	DOWN = 1,
-	LEFT = 2,
-	RIGHT = 3
+	UP = 1,
+	DOWN = 3,
+	LEFT = 0,
+	RIGHT = 2
 };
 
 enum EnemyType
