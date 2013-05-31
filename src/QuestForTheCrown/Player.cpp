@@ -13,6 +13,8 @@ Player::Player(int x, int y) : GameObject(x,y)
 
 	_invencibleTime = 30;
 
+	_movementDelayTime = 0;
+
 	_sprite = "@";
 }
 
@@ -26,7 +28,7 @@ void Player::Update(double gameTime)
 	if( _invencibleTime > 0 ) _invencibleTime--;
 
 	//Get keyboard input and update player position.
-	if( _actionFrames == 0 )
+	if( _actionFrames == 0 && _movementDelayTime == 0 )
 	{
 		char key = Input::GetInput();
 
@@ -54,20 +56,26 @@ void Player::Update(double gameTime)
 				break;
 		}
 
-		if( GameManager::CanMoveTo(new_x, new_y) )
+		if( new_x != _x || new_y != _y )
 		{
-			_x = new_x;
-			_y = new_y;
+			if( GameManager::CanMoveTo(new_x, new_y) )
+			{
+				_x = new_x;
+				_y = new_y;
 
-			if( _x == 0 ) GameManager::ChangeLevel(LEFT);
-			if( _x == 79 ) GameManager::ChangeLevel(RIGHT);
-			if( _y == 2 ) GameManager::ChangeLevel(UP);
-			if( _y == 24 ) GameManager::ChangeLevel(DOWN);
+				if( _x == 0 ) GameManager::ChangeLevel(LEFT);
+				if( _x == 79 ) GameManager::ChangeLevel(RIGHT);
+				if( _y == 2 ) GameManager::ChangeLevel(UP);
+				if( _y == 24 ) GameManager::ChangeLevel(DOWN);
+
+				_movementDelayTime = MOVE_DELAY;
+			}
 		}
 	}
 	else
 	{
-		_actionFrames--;
+		if( _actionFrames > 0 ) _actionFrames--;
+		if( _movementDelayTime > 0 ) _movementDelayTime--;
 	}
 
 	GameObject::Update(gameTime);

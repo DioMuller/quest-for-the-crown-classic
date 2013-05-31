@@ -1,6 +1,8 @@
 #pragma once
 #include "gameobject.h"
 
+#define MOVE_DELAY 2
+
 class Player : public GameObject
 {
 	private:
@@ -9,6 +11,8 @@ class Player : public GameObject
 		int _currentHealth;
 		int _totalHealth;
 		
+		int _movementDelayTime;
+
 		int _invencibleTime;
 	public:
 		Player(int x, int y);
