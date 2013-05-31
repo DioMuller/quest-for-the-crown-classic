@@ -65,6 +65,7 @@ bool GameManager::IsRunning()
 void GameManager::TryHit(int x, int y)
 {
 	//TODO: CHECK LEVEL HITBOXES (ENEMIES)
+	instance._manager->TryHit(x,y);
 }
 
 WORD GameManager::GetBackground()

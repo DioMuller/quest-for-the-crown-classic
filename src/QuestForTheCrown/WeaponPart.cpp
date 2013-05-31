@@ -6,11 +6,13 @@ WeaponPart::WeaponPart(int x, int y, char* appearance[4], int speed, int frames)
 {
 	for( int i = 0; i < 4; i++ )
 	{
-		_appearance[i] = _appearance[i];
+		_appearance[i] = appearance[i];
 	}
 
 	_speed = speed;
 	_frames = frames;
+
+	_color = FOREGROUND_WHITE;
 
 	_active = 0;
 }
@@ -18,10 +20,6 @@ WeaponPart::WeaponPart(int x, int y, char* appearance[4], int speed, int frames)
 
 WeaponPart::~WeaponPart()
 {
-	for( int i = 0; i < 4; i++ )
-	{
-		delete _appearance[i];
-	}
 }
 	
 void WeaponPart::Show(int x, int y, Direction direction)
@@ -33,7 +31,7 @@ void WeaponPart::Show(int x, int y, Direction direction)
 	_y = y + y_diff;
 
 	_speedX = x_diff * _speed;
-	_speedX = y_diff * _speed;
+	_speedY = y_diff * _speed;
 
 	_direction = direction;
 
@@ -65,7 +63,7 @@ void WeaponPart::Update(double gameTime)
 
 		_active--;
 
-		if( _active == 0 ) GameObject::Clean();
+		if( _active == 0 ) mostrar(_x, _y, GameManager::GetBackground(), " ");
 	}
 }
 

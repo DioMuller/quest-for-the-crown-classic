@@ -18,9 +18,11 @@ Player::Player(int x, int y) : GameObject(x,y)
 	_sprite = "@";
 
 	char* swordHolder[4] = {"=", "I", "=", "I"};
-	char* swordPoint[4] = {"<", "^", ">", "v"};
+	char* swordPoint[4] = {"<", "v", ">", "^"};
 
 	_sword = new Weapon(x, y, swordHolder, swordPoint, 0, 15);
+
+	_forcedraw = true;
 }
 
 Player::~Player()
@@ -54,8 +56,20 @@ void Player::Update(double gameTime)
 			case KEY_RIGHT:
 				new_x += 1;
 				break;
-			case KEY_ACTION:
+			case KEY_LEFT_ACTION:
 				_sword->Show(_x,_y, LEFT );
+				_actionFrames = 15;
+				break;
+			case KEY_UP_ACTION:
+				_sword->Show(_x,_y, UP );
+				_actionFrames = 15;
+				break;
+			case KEY_RIGHT_ACTION:
+				_sword->Show(_x,_y, RIGHT );
+				_actionFrames = 15;
+				break;
+			case KEY_DOWN_ACTION:
+				_sword->Show(_x,_y, DOWN );
 				_actionFrames = 15;
 				break;
 			default:
@@ -84,6 +98,8 @@ void Player::Update(double gameTime)
 		if( _movementDelayTime > 0 ) _movementDelayTime--;
 	}
 
+	_sword->Update(gameTime);
+
 	GameObject::Update(gameTime);
 }
 
@@ -92,6 +108,8 @@ void Player::Draw()
 	_color = ((_invencibleTime <= 0) ? FOREGROUND_WHITE : FOREGROUND_YELLOW) | FOREGROUND_INTENSITY;
 	WORD color = _actionFrames == 0 ? FOREGROUND_WHITE : _color;
 	int dist = _actionFrames == 0? 1 : 3;
+
+	_sword->Draw();
 
 	GameObject::Draw();
 }

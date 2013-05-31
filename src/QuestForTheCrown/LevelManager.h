@@ -19,6 +19,7 @@ public:
 	void Draw();
 	bool CheckXY(int x, int y);
 	WORD GetLevelBackground();
+	void TryHit(int x, int y);
 
 private:
 	Level* GetCurrentLevel();

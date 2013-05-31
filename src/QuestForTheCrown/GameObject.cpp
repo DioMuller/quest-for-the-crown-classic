@@ -7,6 +7,8 @@ GameObject::GameObject(int x, int y)
 	this->_x = x;
 	this->_y = y;
 	this->_drawn = false;
+
+	_forcedraw = false;
 }
 
 GameObject::~GameObject()
@@ -18,6 +20,7 @@ void GameObject::Update(double gameTime)
 {
 	if( _drawn && (_x != _old_x || _y != _old_y) )
 	{
+		if( _forcedraw ) Clean();
 		_old_x = _x;
 		_old_y = _y;
 
@@ -27,7 +30,7 @@ void GameObject::Update(double gameTime)
 
 void GameObject::Draw()
 {
-	if( _x != _old_x || _y != _old_y ) 
+	if( _x != _old_x || _y != _old_y || _forcedraw ) 
 	{
 		Clean();
 
@@ -39,9 +42,10 @@ void GameObject::Draw()
 
 void GameObject::Clean()
 {
-	if( _old_x != _x || _old_y != _y )
+	if( _old_x != _x || _old_y != _y || _forcedraw )
 	{
 		mostrar(_old_x, _old_y, GameManager::GetBackground(), " ");
+		if( _forcedraw ) mostrar(_x, _y, GameManager::GetBackground(), " ");
 	}
 }
 

@@ -7,7 +7,7 @@
 int main(int argc, char **argv)
 {
 	TitleScreen::Draw();
-	while( Input::GetInput() != KEY_ACTION ) Sleep(17);
+	while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
 
 	//Main Game Loop
 	while( GameManager::IsRunning() )
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 
 	//Game Over Loop
 	GameOver::Draw();
-	while( Input::GetInput() != KEY_ACTION ) Sleep(17);
+	while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
 
 	//End of the Game
 	return 0;

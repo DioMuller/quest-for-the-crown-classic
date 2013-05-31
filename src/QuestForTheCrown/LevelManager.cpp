@@ -78,3 +78,8 @@ WORD LevelManager::GetLevelBackground()
 {
 	return GetCurrentLevel()->GetBackground();
 }
+
+void LevelManager::TryHit(int x, int y)
+{
+	GetCurrentLevel()->HitObjects(x,y);
+}

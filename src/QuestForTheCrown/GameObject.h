@@ -16,6 +16,7 @@ class GameObject
 		char* _sprite;
 		WORD _color;
 
+		bool _forcedraw;
 	public:
 		GameObject(int x, int y);
 		~GameObject();
