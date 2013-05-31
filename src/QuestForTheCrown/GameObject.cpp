@@ -49,3 +49,13 @@ bool GameObject::CollidesWith(int x, int y)
 {
 	return (_x == x) && (_y == y);
 }
+
+int GameObject::GetX()
+{
+	return _x;
+}
+
+int GameObject::GetY()
+{
+	return _y;
+}

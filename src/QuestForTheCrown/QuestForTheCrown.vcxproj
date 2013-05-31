@@ -92,6 +92,7 @@
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="Maps.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponPart.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponPart.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
 #include "gameobject.h"
+#include "Weapon.h"
 
 #define MOVE_DELAY 2
 
@@ -14,6 +15,8 @@ class Player : public GameObject
 		int _movementDelayTime;
 
 		int _invencibleTime;
+
+		Weapon* _sword;
 	public:
 		Player(int x, int y);
 		~Player();

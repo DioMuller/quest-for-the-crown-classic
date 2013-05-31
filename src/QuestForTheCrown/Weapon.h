@@ -1,16 +1,23 @@
 #pragma once
-#include "GameObject.h"
+#include "WeaponPart.h"
 #include "Enum.h"
 
-class Weapon : GameObject
+class Weapon
 {
 	private:
 		Direction _direction;
-		char _projectile[4];
-		char _holder[4];
+		
+		WeaponPart* _hold;
+		WeaponPart* _projectile;
 
 	public:
-		Weapon(int x, int y, Direction direction);
+		Weapon(int x, int y, char* holder[4], char* projectile[4], int speed, int frames);
 		~Weapon();
+
+	public:
+		void Show(int x, int y, Direction direction);
+
+		void Update(double gameTime);
+		void Draw();
 };
 

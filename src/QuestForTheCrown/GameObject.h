@@ -25,5 +25,8 @@ class GameObject
 		virtual void Draw();
 		virtual void Clean();
 
+		int GetX();
+		int GetY();
+
 		bool CollidesWith(int x, int y);
 };

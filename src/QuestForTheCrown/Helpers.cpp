@@ -1,3 +1,6 @@
+#ifndef __HELPERS_H_
+#define __HELPERS_H_
+
 #include <time.h>
 
 /*
@@ -9,3 +12,5 @@ double current_time()
 
 	return (double) (cl / CLOCKS_PER_SEC) * 1000.0;
 }
+
+#endif

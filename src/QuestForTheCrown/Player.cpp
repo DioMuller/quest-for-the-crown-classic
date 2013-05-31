@@ -16,11 +16,16 @@ Player::Player(int x, int y) : GameObject(x,y)
 	_movementDelayTime = 0;
 
 	_sprite = "@";
+
+	char* swordHolder[4] = {"=", "I", "=", "I"};
+	char* swordPoint[4] = {"<", "^", ">", "v"};
+
+	_sword = new Weapon(x, y, swordHolder, swordPoint, 0, 15);
 }
 
 Player::~Player()
 {
-	//Nothing Else to Do
+	delete _sword;
 }
 
 void Player::Update(double gameTime)
@@ -50,6 +55,7 @@ void Player::Update(double gameTime)
 				new_x += 1;
 				break;
 			case KEY_ACTION:
+				_sword->Show(_x,_y, LEFT );
 				_actionFrames = 15;
 				break;
 			default:
