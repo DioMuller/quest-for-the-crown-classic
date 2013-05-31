@@ -25,7 +25,7 @@ Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 			break;
 	}
 
-	_color = FOREGROUND_RED;
+	_color = FOREGROUND_RED | FOREGROUND_INTENSITY;
 
 	_sprite = new char[2];
 	_sprite[0] = _type;

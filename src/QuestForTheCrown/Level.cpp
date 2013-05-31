@@ -23,7 +23,7 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
 				case 'o':
 				case '8':
 				case 'W':
-					_objects.push_back(new Enemy(i, j, (EnemyType) map[i][j]));
+					_objects.push_back(new Enemy( j, i + 2, (EnemyType) map[i][j]));
 					_level[i][j] = ' ';
 					break;
 				default:
