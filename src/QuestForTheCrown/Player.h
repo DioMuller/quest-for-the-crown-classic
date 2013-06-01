@@ -2,7 +2,7 @@
 #include "gameobject.h"
 #include "Weapon.h"
 
-#define MOVE_DELAY 2
+#define MOVE_DELAY 1
 
 class Player : public GameObject
 {
