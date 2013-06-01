@@ -123,7 +123,7 @@ void Player::Hit()
 
 		if( _currentHealth <= 0 )
 		{
-			GameManager::EndGame();
+			GameManager::EndGame(false);
 		}
 	}
 }

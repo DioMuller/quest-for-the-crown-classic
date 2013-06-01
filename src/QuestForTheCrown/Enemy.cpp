@@ -63,3 +63,8 @@ void Enemy::Update(double gameTime)
 	GameManager::HitPlayer(_x,_y);
 	GameObject::Update(gameTime);
 }
+
+EnemyType Enemy::GetType()
+{
+	return _type;
+}

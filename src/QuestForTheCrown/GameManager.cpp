@@ -11,6 +11,8 @@ GameManager::GameManager()
 
 	_isRunning = true;
 	_initialized = true;
+
+	_success = false;
 }
 
 GameManager::~GameManager()
@@ -73,8 +75,9 @@ WORD GameManager::GetBackground()
 	return instance._manager->GetLevelBackground();
 }
 
-void GameManager::EndGame()
+void GameManager::EndGame(bool success)
 {
+	instance._success = success;
 	instance._isRunning = false;
 }
 
@@ -88,4 +91,9 @@ bool GameManager::CanMoveTo(int x, int y)
 void GameManager::ChangeLevel(Direction direction)
 {
 	instance._manager->ChangeLevel(instance._player, direction);
+}
+
+bool GameManager::WasSuccessful()
+{
+	return instance._success;
 }

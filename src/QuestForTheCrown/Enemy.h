@@ -14,5 +14,7 @@ class Enemy : public GameObject
 
 	public:
 		void Update(double gameTime);
+
+		EnemyType GetType();
 };
 

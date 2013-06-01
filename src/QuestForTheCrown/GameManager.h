@@ -12,6 +12,8 @@ class GameManager
 		bool _initialized;
 		bool _isRunning;
 
+		bool _success;
+
 		//Time variables
 		double _currentTime;
 
@@ -36,6 +38,7 @@ class GameManager
 		static void HitPlayer(int x, int y);
 		static bool CanMoveTo(int x, int y);
 		static void ChangeLevel(Direction direction);
-		static void EndGame();
+		static void EndGame(bool success);
+		static bool WasSuccessful();
 };
 

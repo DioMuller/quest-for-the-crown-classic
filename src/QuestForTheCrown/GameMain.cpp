@@ -1,6 +1,7 @@
 #include "TitleScreen.h"
 #include "GameManager.h"
 #include "GameOver.h"
+#include "VictoryScreen.h"
 
 #include "Input.h"
 
@@ -19,7 +20,14 @@ int main(int argc, char **argv)
 	}
 
 	//Game Over Loop
-	GameOver::Draw();
+	if( GameManager::WasSuccessful() )
+	{
+		VictoryScreen::Draw();
+	}
+	else
+	{
+		GameOver::Draw();
+	}
 	while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
 
 	//End of the Game

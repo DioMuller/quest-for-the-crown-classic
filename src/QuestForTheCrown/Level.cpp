@@ -1,4 +1,5 @@
 ﻿#include "Level.h"
+#include "GameManager.h"
 
 
 Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background)
@@ -87,6 +88,7 @@ bool Level::CheckXY(int x, int y)
 void Level::HitObjects(int x, int y)
 {
   	std::list<Enemy*> toRemove;
+	bool finish = false;
 
 	for( std::list<GameObject*>::iterator iterator = _objects.begin();  iterator !=  _objects.end();  iterator++  )
 	{
@@ -103,8 +105,14 @@ void Level::HitObjects(int x, int y)
 
 	for( std::list<Enemy*>::iterator iterator = toRemove.begin(); iterator != toRemove.end(); iterator++ )
 	{
-		 _objects.remove((*iterator));
+		if( (*iterator)->GetType() == WIZARD ) finish = true;
+
+		_objects.remove((*iterator));
+
+		delete (Enemy*) (*iterator);
 	}
+
+	if( finish ) GameManager::EndGame(true);
 }
 
 int Level::GetNeighbour(Direction direction)
