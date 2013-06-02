@@ -1,33 +1,40 @@
 #include "LevelManager.h"
-#include "Maps.h"
+#include "Definitions.h"
 
 
-LevelManager::LevelManager()
+LevelManager::LevelManager(Level** levels, int levelCount, LevelManager** dungeons, int dungeonCount)
 {
-	_levels = new Level*[9];
+	_levelCount = levelCount;
+	_dungeonCount = dungeonCount;
 
-	_levels[0] = &map01;
-	_levels[1] = &map02;
-	_levels[2] = &map03;
-	_levels[3] = &map04;
-	_levels[4] = &map05;
-	_levels[5] = &map06;
-	_levels[6] = &map07;
-	_levels[7] = &map08;
-	_levels[8] = &map09;
+	_levels = levels;
+	_dungeons = dungeons;
 
 	_currentLevel = 0;
+	_currentDungeon = -1;
 }
-
 
 LevelManager::~LevelManager()
 {
-	for( int i = 0; i < 9; i++ )
+	if( _levels )
 	{
-		delete _levels[i];
+		for( int i = 0; i < _levelCount; i++ )
+		{
+			delete _levels[i];
+		}
+
+		delete[] _levels;	
 	}
 
-	delete[] _levels;	
+	if( _dungeons )
+	{
+		for( int i = 0; i < _dungeonCount; i++ )
+		{
+			delete _dungeons[i];
+		}
+
+		delete[] _dungeons;	
+	}
 }
 
 Level* LevelManager::GetCurrentLevel()
@@ -82,4 +89,20 @@ WORD LevelManager::GetLevelBackground()
 void LevelManager::TryHit(int x, int y)
 {
 	GetCurrentLevel()->HitObjects(x,y);
+}
+
+void LevelManager::SetParent(LevelManager* parent)
+{
+	_parent = parent;
+}
+
+void LevelManager::InitializeChild()
+{
+	if( _dungeons )
+	{
+		for( int i = 0; i < _levelCount; i++ )
+		{
+			_dungeons[i]->SetParent(this);
+		}
+	}
 }

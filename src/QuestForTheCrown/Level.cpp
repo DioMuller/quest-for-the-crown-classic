@@ -21,6 +21,8 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
 				case '~':
 					_level[i][j] = '~';
 					break;
+				case 'G':
+					_level[i][j] = '#';
 				case (char) SLIME:
 				case (char) GOON:
 				case (char) BAT:

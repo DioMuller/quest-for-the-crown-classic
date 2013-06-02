@@ -1,17 +1,20 @@
 #include "GameManager.h"
 #include "Helpers.h"
+#include "Maps.h"
 
 GameManager instance;
 
 GameManager::GameManager()
 {
+	//Initialize the player
 	_player = new Player(10,10);
 
-	_manager = new LevelManager();
+	//Initialize Level Manager
+	_manager = overworldMap;
 
+	//Initialize Game State
 	_isRunning = true;
 	_initialized = true;
-
 	_success = false;
 }
 
@@ -66,7 +69,6 @@ bool GameManager::IsRunning()
 
 void GameManager::TryHit(int x, int y)
 {
-	//TODO: CHECK LEVEL HITBOXES (ENEMIES)
 	instance._manager->TryHit(x,y);
 }
 

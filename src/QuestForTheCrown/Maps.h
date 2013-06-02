@@ -2,10 +2,7 @@
 #define __MAPS_H_
 
 #include "Level.h"
-
-#define NONE -1
-
-#define OUTSIDE -255
+#include "Definitions.h"
 
 /************************************************************
 * Overworld Maps                                            *
@@ -299,9 +296,9 @@ char dungeon1_map01[23][81] =
 	"#                                                                              #",
 	"#                                                                              #",
 	"#                                                                              #",
-	"#####################################22#########################################"
+	"#####################################  #########################################"
 };
-int dungeon1map1neighbours[4] = {NONE, 10, NONE, OUTSIDE};
+int dungeon1map1neighbours[4] = {NONE, 1, NONE, OUTSIDE};
 Level dungeon1map1 = Level(dungeon1_map01, dungeon1map1neighbours, 0);
 
 char dungeon1_map02[23][81] = 
@@ -330,7 +327,7 @@ char dungeon1_map02[23][81] =
 	"#                               G                                              #",
 	"#####################################  #########################################"
 };
-int dungeon1map2neighbours[4] = {NONE, 11, 12, 9};
+int dungeon1map2neighbours[4] = {NONE, 2, 3, 0};
 Level dungeon1map2 = Level(dungeon1_map02, dungeon1map2neighbours, 0);
 
 char dungeon1_map03[23][81] = 
@@ -359,7 +356,7 @@ char dungeon1_map03[23][81] =
 	"#                          G                   G                               #",
 	"#####################################  #########################################"
 };
-int dungeon1map3neighbours[4] = {NONE, NONE, NONE, 10};
+int dungeon1map3neighbours[4] = {NONE, NONE, NONE, 1};
 Level dungeon1map3 = Level(dungeon1_map03, dungeon1map3neighbours, 0);
 
 char dungeon1_map04[23][81] = 
@@ -388,7 +385,7 @@ char dungeon1_map04[23][81] =
 	"#                               G                                              #",
 	"################################################################################"
 };
-int dungeon1map4neighbours[4] = {10, 13, NONE, NONE};
+int dungeon1map4neighbours[4] = {1, 4, NONE, NONE};
 Level dungeon1map4 = Level(dungeon1_map04, dungeon1map4neighbours, 0);
 
 char dungeon1_map05[23][81] = 
@@ -417,7 +414,32 @@ char dungeon1_map05[23][81] =
 	"#                                                                              #",
 	"#####################################  #########################################"
 	};
-int dungeon1map5neighbours[4] = {NONE, NONE, NONE, 12};
+int dungeon1map5neighbours[4] = {NONE, NONE, NONE, 3};
 Level dungeon1map5 = Level(dungeon1_map05, dungeon1map5neighbours, 0);
 
+
+
+/************************************************************
+* Map Arrays                                                *
+************************************************************/
+//Overworld map array.
+#define OVERWORLD_LEVELS 9
+Level* overworldLevels[OVERWORLD_LEVELS] = { &map01, &map02, &map03, &map04, &map05, &map06, &map07, &map08, &map09 };
+
+//Dungeon1 map array.
+#define DUNGEON1_LEVELS 5
+Level* dungeon1Levels[DUNGEON1_LEVELS] = { &dungeon1map1, &dungeon1map2, &dungeon1map3, &dungeon1map4, &dungeon1map5 };
+
+/************************************************************
+* Dungeon Definitions                                       *
+************************************************************/
+
+LevelManager* dungeon1 = new LevelManager(dungeon1Levels, DUNGEON1_LEVELS, NULL, 0);
+
+//Dungeon array
+#define DUNGEONS 1
+LevelManager* dungeons[DUNGEONS] = { dungeon1 };
+
+//And finally, the overworld.
+LevelManager* overworldMap = new LevelManager(overworldLevels, OVERWORLD_LEVELS, dungeons, DUNGEONS);
 #endif
