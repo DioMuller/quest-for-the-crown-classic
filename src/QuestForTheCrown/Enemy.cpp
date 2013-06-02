@@ -23,7 +23,7 @@ Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 			moveCount = 10;
 			break;
 		case WORM:
-			moveCount = 15;
+			moveCount = 5;
 			break;
 		case WIZARD:
 			moveCount = 150;
@@ -41,7 +41,7 @@ Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 	_moveCount = moveCount;
 	_nextMovement = moveCount;
 
-	_direction = RIGHT;
+	_direction = LEFT;
 }
 
 
