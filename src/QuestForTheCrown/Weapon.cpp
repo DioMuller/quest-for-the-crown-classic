@@ -3,8 +3,8 @@
 
 Weapon::Weapon(int x, int y, char* holder[4], char* projectile[4], int speed, int frames)
 {
-	_hold = new WeaponPart(x, y, holder, 0, frames);
-	_projectile = new WeaponPart(x, y, projectile, speed, frames);
+	_hold = new WeaponPart(x, y, holder, 0, frames, false);
+	_projectile = new WeaponPart(x, y, projectile, speed, frames, false);
 }
 
 
@@ -17,7 +17,7 @@ Weapon::~Weapon()
 void Weapon::Show(int x, int y, Direction direction)
 {
 	_hold->Show(x,y,direction);
-	_projectile->Show(_hold->GetX(), _hold->GetY(), direction);
+	_projectile->Show(_hold->GetPosition().X, _hold->GetPosition().Y, direction);
 }
 
 void Weapon::Update(double gameTime)

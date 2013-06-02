@@ -40,5 +40,7 @@ class GameManager
 		static void ChangeLevel(Direction direction);
 		static void EndGame(bool success);
 		static bool WasSuccessful();
+
+		static Position GetPlayerPosition();
 };
 

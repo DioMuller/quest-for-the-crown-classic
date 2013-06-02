@@ -14,9 +14,10 @@ class WeaponPart :	public GameObject
 		int _speedY;
 
 		int _active;
+		bool _isProjectile;
 
 	public:
-		WeaponPart(int x, int y, char* appearance[4], int speed, int frames);
+		WeaponPart(int x, int y, char* appearance[4], int speed, int frames, bool isProjectile);
 		~WeaponPart(void);
 
 	public: 		

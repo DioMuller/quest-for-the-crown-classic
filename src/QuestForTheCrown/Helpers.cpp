@@ -1,6 +1,4 @@
-#ifndef __HELPERS_H_
-#define __HELPERS_H_
-
+#include "Helpers.h"
 #include <time.h>
 
 /*
@@ -13,4 +11,11 @@ double current_time()
 	return (double) (cl / CLOCKS_PER_SEC) * 1000.0;
 }
 
-#endif
+Direction next_direction(Direction current)
+{
+	if( current = LEFT ) return UP;
+	if( current = UP ) return RIGHT;
+	if( current = RIGHT ) return DOWN;
+	if( current = DOWN ) return LEFT;
+
+}

@@ -240,7 +240,7 @@ char worldmap_08[23][81] =
 	"################################################################################"
 };
 int map8neighbours[4] = {NONE, 4, 8, NONE};
-Level map0B = Level(worldmap_08, map8neighbours, BACKGROUND_BLUE);
+Level map08 = Level(worldmap_08, map8neighbours, BACKGROUND_BLUE);
 
 char worldmap_09[23][81] = 
 {

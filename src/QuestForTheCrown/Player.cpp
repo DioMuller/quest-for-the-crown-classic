@@ -39,8 +39,8 @@ void Player::Update(double gameTime)
 	{
 		char key = Input::GetInput();
 
-		int new_x = _x;
-		int new_y = _y;
+		int new_x = _position.X;
+		int new_y = _position.Y;
 
 		switch (key)
 		{
@@ -57,36 +57,36 @@ void Player::Update(double gameTime)
 				new_x += 1;
 				break;
 			case KEY_LEFT_ACTION:
-				_sword->Show(_x,_y, LEFT );
+				_sword->Show(_position.X,_position.Y, LEFT );
 				_actionFrames = 15;
 				break;
 			case KEY_UP_ACTION:
-				_sword->Show(_x,_y, UP );
+				_sword->Show(_position.X,_position.Y, UP );
 				_actionFrames = 15;
 				break;
 			case KEY_RIGHT_ACTION:
-				_sword->Show(_x,_y, RIGHT );
+				_sword->Show(_position.X,_position.Y, RIGHT );
 				_actionFrames = 15;
 				break;
 			case KEY_DOWN_ACTION:
-				_sword->Show(_x,_y, DOWN );
+				_sword->Show(_position.X,_position.Y, DOWN );
 				_actionFrames = 15;
 				break;
 			default:
 				break;
 		}
 
-		if( new_x != _x || new_y != _y )
+		if( new_x != _position.X || new_y != _position.Y )
 		{
 			if( GameManager::CanMoveTo(new_x, new_y) )
 			{
-				_x = new_x;
-				_y = new_y;
+				_position.X = new_x;
+				_position.Y = new_y;
 
-				if( _x == 0 ) GameManager::ChangeLevel(LEFT);
-				if( _x == 79 ) GameManager::ChangeLevel(RIGHT);
-				if( _y == 2 ) GameManager::ChangeLevel(UP);
-				if( _y == 24 ) GameManager::ChangeLevel(DOWN);
+				if( _position.X == 0 ) GameManager::ChangeLevel(LEFT);
+				if( _position.X == 79 ) GameManager::ChangeLevel(RIGHT);
+				if( _position.Y == 2 ) GameManager::ChangeLevel(UP);
+				if( _position.Y == 24 ) GameManager::ChangeLevel(DOWN);
 
 				_movementDelayTime = MOVE_DELAY;
 			}
@@ -140,10 +140,10 @@ int Player::GetCurrentHealth()
 
 void Player::SetX( int pos )
 {
-	_x = pos;
+	_position.X = pos;
 }
 
 void Player::SetY( int pos )
 {
-	_y = pos;
+	_position.Y = pos;
 }

@@ -12,7 +12,9 @@ enum Direction
 enum EnemyType
 {
 	SLIME = 'o',
-	GOON = '8',
+	GOON = 'B',
+	BAT = '^',
+	WORM = 'O',
 	WIZARD = 'W'
 };
 

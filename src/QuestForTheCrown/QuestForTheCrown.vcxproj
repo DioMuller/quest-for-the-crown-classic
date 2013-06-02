@@ -89,6 +89,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="Maps.h" />
     <ClInclude Include="VictoryScreen.h" />

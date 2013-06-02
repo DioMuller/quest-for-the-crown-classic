@@ -1,15 +1,13 @@
 #pragma once
 #include "Console.h"
+#include "Position.h"
 
 class GameObject
 {
 	//Attributes
 	protected:
-		int _x;
-		int _y;
-
-		int _old_x;
-		int _old_y;
+		Position _position;
+		Position _oldPosition;
 
 		bool _drawn;
 
@@ -26,8 +24,7 @@ class GameObject
 		virtual void Draw();
 		virtual void Clean();
 
-		int GetX();
-		int GetY();
+		Position GetPosition();
 
 		bool CollidesWith(int x, int y);
 };

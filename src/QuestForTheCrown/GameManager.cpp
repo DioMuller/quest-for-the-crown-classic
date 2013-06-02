@@ -97,3 +97,8 @@ bool GameManager::WasSuccessful()
 {
 	return instance._success;
 }
+
+Position GameManager::GetPlayerPosition()
+{
+	return instance._player->GetPosition();
+}

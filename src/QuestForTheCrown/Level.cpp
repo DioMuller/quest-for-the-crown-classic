@@ -21,9 +21,11 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
 				case '~':
 					_level[i][j] = '~';
 					break;
-				case 'o':
-				case '8':
-				case 'W':
+				case (char) SLIME:
+				case (char) GOON:
+				case (char) BAT:
+				case (char) WORM:
+				case (char) WIZARD:
 					_objects.push_back(new Enemy( j, i + 2, (EnemyType) map[i][j]));
 					_level[i][j] = ' ';
 					break;

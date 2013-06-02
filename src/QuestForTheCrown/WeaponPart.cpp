@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 
-WeaponPart::WeaponPart(int x, int y, char* appearance[4], int speed, int frames) : GameObject(x,y)
+WeaponPart::WeaponPart(int x, int y, char* appearance[4], int speed, int frames, bool isProjectile) : GameObject(x,y)
 {
 	for( int i = 0; i < 4; i++ )
 	{
@@ -15,6 +15,7 @@ WeaponPart::WeaponPart(int x, int y, char* appearance[4], int speed, int frames)
 	_color = FOREGROUND_WHITE;
 
 	_active = 0;
+	_isProjectile = isProjectile;
 }
 
 
@@ -27,8 +28,8 @@ void WeaponPart::Show(int x, int y, Direction direction)
 	int x_diff = direction == LEFT ? -1 : direction == RIGHT ? 1 : 0;
 	int y_diff = direction == DOWN ? -1 : direction == UP ? 1 : 0;
 
-	_x = x + x_diff;
-	_y = y + y_diff;
+	_position.X = x + x_diff;
+	_position.Y = y + y_diff;
 
 	_speedX = x_diff * _speed;
 	_speedY = y_diff * _speed;
@@ -44,26 +45,26 @@ void WeaponPart::Update(double gameTime)
 {
 	if( _active > 0 )
 	{
-		int new_x = _x + _speedX;
-		int new_y = _y + _speedY;
+		int new_x = _position.X + _speedX;
+		int new_y = _position.Y + _speedY;
 
 		if( GameManager::CanMoveTo( new_x, new_y ) )
 		{
-			_x = new_x;
-			_y = new_y;
+			_position.X = new_x;
+			_position.Y = new_y;
 		}
 		else
 		{
 			_active = 0;
 		}
 
-		GameManager::TryHit(_x,_y);
+		GameManager::TryHit(_position.X,_position.Y);
 
 		GameObject::Update(gameTime);
 
 		_active--;
 
-		if( _active == 0 ) mostrar(_x, _y, GameManager::GetBackground(), " ");
+		if( _active == 0 ) mostrar(_position.X, _position.Y, GameManager::GetBackground(), " ");
 	}
 }
 
