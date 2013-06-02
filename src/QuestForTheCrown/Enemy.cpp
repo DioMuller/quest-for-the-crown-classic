@@ -20,10 +20,10 @@ Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 			moveCount = 15;
 			break;
 		case BAT:
-			moveCount = 5;
+			moveCount = 10;
 			break;
 		case WORM:
-			moveCount = 5;
+			moveCount = 15;
 			break;
 		case WIZARD:
 			moveCount = 150;
@@ -109,7 +109,21 @@ void Enemy::Update(double gameTime)
 						new_x = _position.X;
 						new_y = _position.Y;
 
-						_direction = next_direction(_direction);
+						switch( _direction )
+						{
+							case LEFT:
+								_direction = UP;
+								break;
+							case UP:
+								_direction = RIGHT;
+								break;
+							case RIGHT:
+								_direction = DOWN;
+								break;
+							case DOWN:
+								_direction = LEFT;
+								break;
+						}
 					}
 					else
 					{

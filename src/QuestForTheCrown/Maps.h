@@ -434,12 +434,12 @@ Level* dungeon1Levels[DUNGEON1_LEVELS] = { &dungeon1map1, &dungeon1map2, &dungeo
 * Dungeon Definitions                                       *
 ************************************************************/
 
-LevelManager* dungeon1 = new LevelManager(dungeon1Levels, DUNGEON1_LEVELS, NULL, 0);
+LevelManager dungeon1 = LevelManager(dungeon1Levels, DUNGEON1_LEVELS, NULL, 0, Position(39, 22));
 
 //Dungeon array
 #define DUNGEONS 1
-LevelManager* dungeons[DUNGEONS] = { dungeon1 };
+LevelManager* dungeons[DUNGEONS] = { &dungeon1 };
 
 //And finally, the overworld.
-LevelManager* overworldMap = new LevelManager(overworldLevels, OVERWORLD_LEVELS, dungeons, DUNGEONS);
+LevelManager* overworldMap = new LevelManager(overworldLevels, OVERWORLD_LEVELS, dungeons, DUNGEONS, Position(0,0));
 #endif

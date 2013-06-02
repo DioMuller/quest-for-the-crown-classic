@@ -1,5 +1,6 @@
 ﻿#include "Level.h"
 #include "GameManager.h"
+#include "Waypoint.h"
 
 
 Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background)
@@ -23,12 +24,25 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
 					break;
 				case 'G':
 					_level[i][j] = '#';
+					break;
 				case (char) SLIME:
 				case (char) GOON:
 				case (char) BAT:
 				case (char) WORM:
 				case (char) WIZARD:
 					_objects.push_back(new Enemy( j, i + 2, (EnemyType) map[i][j]));
+					_level[i][j] = ' ';
+					break;
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					_objects.push_back(new Waypoint(j, i+2, map[i][j] - '1'));
 					_level[i][j] = ' ';
 					break;
 				default:

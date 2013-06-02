@@ -42,5 +42,8 @@ class GameManager
 		static bool WasSuccessful();
 
 		static Position GetPlayerPosition();
+		static void SetPlayerPosition(Position position);
+
+		static void GoToDungeon(int dungeon);
 };
 

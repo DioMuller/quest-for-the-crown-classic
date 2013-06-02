@@ -15,8 +15,12 @@ private:
 	int _levelCount;
 	int _dungeonCount;
 
+	Position _startPoint;
+
+	Position _oldPoint;
+
 public:
-	LevelManager(Level** levels, int levelCount, LevelManager** dungeons, int dungeonCount);
+	LevelManager(Level** levels, int levelCount, LevelManager** dungeons, int dungeonCount, Position startPoint);
 	~LevelManager();
 
 public:
@@ -30,11 +34,16 @@ public:
 
 
 	WORD GetLevelBackground();
+	Position GetStart();
 
 	void SetParent(LevelManager* parent);
-	void InitializeChild();
+	void InitializeChildren();
+
+	void GoToDungeon(int id);
+	void BackToMap();
 
 private:
 	Level* GetCurrentLevel();
+	void SetCurrentLevel(int level);
 };
 

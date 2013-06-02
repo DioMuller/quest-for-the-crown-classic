@@ -1,8 +1,9 @@
 #include "LevelManager.h"
+#include "GameManager.h"
 #include "Definitions.h"
 
 
-LevelManager::LevelManager(Level** levels, int levelCount, LevelManager** dungeons, int dungeonCount)
+LevelManager::LevelManager(Level** levels, int levelCount, LevelManager** dungeons, int dungeonCount, Position startPoint)
 {
 	_levelCount = levelCount;
 	_dungeonCount = dungeonCount;
@@ -12,57 +13,78 @@ LevelManager::LevelManager(Level** levels, int levelCount, LevelManager** dungeo
 
 	_currentLevel = 0;
 	_currentDungeon = -1;
+
+	_startPoint = startPoint;
 }
 
 LevelManager::~LevelManager()
 {
-	if( _levels )
+	if( _parent == NULL )
 	{
-		for( int i = 0; i < _levelCount; i++ )
+		if( _levels )
 		{
-			delete _levels[i];
+			for( int i = 0; i < _levelCount; i++ )
+			{
+				delete (Level*) _levels[i];
+			}
+
+			delete[] _levels;	
 		}
 
-		delete[] _levels;	
-	}
-
-	if( _dungeons )
-	{
-		for( int i = 0; i < _dungeonCount; i++ )
+		if( _dungeons )
 		{
-			delete _dungeons[i];
-		}
+			for( int i = 0; i < _dungeonCount; i++ )
+			{
+				delete (Level*) _dungeons[i];
+			}
 
-		delete[] _dungeons;	
+			delete[] _dungeons;	
+		}
 	}
 }
 
 Level* LevelManager::GetCurrentLevel()
 {
-	return _levels[_currentLevel];
+	if( _currentDungeon == NONE )
+	{
+		return _levels[_currentLevel];
+	}
+	else
+	{
+		return _dungeons[_currentDungeon]->GetCurrentLevel();
+	}
 }
 
 void LevelManager::ChangeLevel(Player* player, Direction direction)
 {
-	GetCurrentLevel()->ResetDraw();
-	_currentLevel = ( GetCurrentLevel()->GetNeighbour(direction) );
-	
-	switch (direction)
+	int neighbour = GetCurrentLevel()->GetNeighbour(direction);
+
+	if( neighbour == OUTSIDE )
 	{
-		case UP:
-			player->SetY(23);
-			break;
-		case DOWN:
-			player->SetY(3);
-			break;
-		case LEFT:
-			player->SetX(78);
-			break;
-		case RIGHT:
-			player->SetX(1);
-			break;
-		default:
-			break;
+		BackToMap();
+	}
+	else
+	{
+		GetCurrentLevel()->ResetDraw();
+		SetCurrentLevel( neighbour );
+	
+		switch (direction)
+		{
+			case UP:
+				player->SetY(23);
+				break;
+			case DOWN:
+				player->SetY(3);
+				break;
+			case LEFT:
+				player->SetX(78);
+				break;
+			case RIGHT:
+				player->SetX(1);
+				break;
+			default:
+				break;
+		}
 	}
 }
 
@@ -96,13 +118,53 @@ void LevelManager::SetParent(LevelManager* parent)
 	_parent = parent;
 }
 
-void LevelManager::InitializeChild()
+void LevelManager::InitializeChildren()
 {
 	if( _dungeons )
 	{
-		for( int i = 0; i < _levelCount; i++ )
+		for( int i = 0; i < _dungeonCount; i++ )
 		{
 			_dungeons[i]->SetParent(this);
+			_dungeons[i]->InitializeChildren();
 		}
+	}
+}
+
+void LevelManager::GoToDungeon(int id)
+{
+	Position player = GameManager::GetPlayerPosition();
+	player.Y++; //Realocate one down
+
+	_oldPoint = player;
+
+	_currentDungeon = id;
+
+	GetCurrentLevel()->ResetDraw();
+
+	GameManager::SetPlayerPosition(_dungeons[_currentDungeon]->GetStart());
+}
+
+void LevelManager::BackToMap()
+{
+	_currentDungeon = NONE;
+	GetCurrentLevel()->ResetDraw();
+
+	GameManager::SetPlayerPosition(_oldPoint);
+}
+
+Position LevelManager::GetStart()
+{
+	return _startPoint;
+}
+
+void LevelManager::SetCurrentLevel(int level)
+{
+	if( _currentDungeon == NONE )
+	{
+		_currentLevel = level;
+	}
+	else
+	{
+		_dungeons[_currentDungeon]->SetCurrentLevel(level);
 	}
 }

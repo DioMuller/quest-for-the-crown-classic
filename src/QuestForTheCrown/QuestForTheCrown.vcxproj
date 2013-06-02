@@ -94,6 +94,7 @@
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="Maps.h" />
     <ClInclude Include="VictoryScreen.h" />
+    <ClInclude Include="Waypoint.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponPart.h" />
   </ItemGroup>
@@ -110,6 +111,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="VictoryScreen.cpp" />
+    <ClCompile Include="Waypoint.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponPart.cpp" />
   </ItemGroup>

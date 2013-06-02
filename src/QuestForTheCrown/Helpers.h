@@ -3,6 +3,5 @@
 #include "Enum.h"
 
 double current_time();
-Direction next_direction(Direction current);
 
 #endif

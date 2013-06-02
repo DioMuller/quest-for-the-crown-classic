@@ -11,6 +11,7 @@ GameManager::GameManager()
 
 	//Initialize Level Manager
 	_manager = overworldMap;
+	_manager->InitializeChildren();
 
 	//Initialize Game State
 	_isRunning = true;
@@ -103,4 +104,15 @@ bool GameManager::WasSuccessful()
 Position GameManager::GetPlayerPosition()
 {
 	return instance._player->GetPosition();
+}
+
+void GameManager::SetPlayerPosition(Position position)
+{
+	instance._player->SetX(position.X);
+	instance._player->SetY(position.Y);
+}
+
+void GameManager::GoToDungeon(int dungeon)
+{
+	instance._manager->GoToDungeon(dungeon);
 }
