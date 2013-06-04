@@ -98,9 +98,9 @@ void LevelManager::Draw()
 	GetCurrentLevel()->Draw();
 }
 
-bool LevelManager::CheckXY(int x, int y)
+bool LevelManager::CheckXY(int x, int y, bool isProjectile)
 {
-	return GetCurrentLevel()->CheckXY(x,y);
+	return GetCurrentLevel()->CheckXY(x,y, isProjectile);
 }
 
 WORD LevelManager::GetLevelBackground()
@@ -167,4 +167,14 @@ void LevelManager::SetCurrentLevel(int level)
 	{
 		_dungeons[_currentDungeon]->SetCurrentLevel(level);
 	}
+}
+
+void LevelManager::AddObject(GameObject* object)
+{
+	GetCurrentLevel()->AddObject(object);
+}
+
+void LevelManager::RemoveObject(GameObject* object)
+{
+	GetCurrentLevel()->RemoveObject(object);
 }

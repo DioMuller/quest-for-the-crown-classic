@@ -84,12 +84,13 @@ void GameManager::EndGame(bool success)
 	instance._isRunning = false;
 }
 
-bool GameManager::CanMoveTo(int x, int y)
+bool GameManager::CanMoveTo(int x, int y, bool isProjectile)
 {
 	if( x < 0 || x > 79 || y < 2 || y > 24 ) return false;
 
-	return instance._manager->CheckXY(x, y);
+	return instance._manager->CheckXY(x, y, isProjectile);
 }
+
 
 void GameManager::ChangeLevel(Direction direction)
 {
@@ -115,4 +116,14 @@ void GameManager::SetPlayerPosition(Position position)
 void GameManager::GoToDungeon(int dungeon)
 {
 	instance._manager->GoToDungeon(dungeon);
+}
+
+void GameManager::AddObject(GameObject* object)
+{
+	instance._manager->AddObject(object);
+}
+
+void GameManager::RemoveObject(GameObject* object)
+{
+	instance._manager->RemoveObject(object);
 }

@@ -3,8 +3,8 @@
 
 Weapon::Weapon(int x, int y, char* holder[4], char* projectile[4], int speed, int frames)
 {
-	_hold = new WeaponPart(x, y, holder, 0, frames, false);
-	_projectile = new WeaponPart(x, y, projectile, speed, frames, false);
+	_hold = new WeaponPart(x, y, holder, 0, frames, false, false);
+	_projectile = new WeaponPart(x, y, projectile, speed, frames, false, false);
 }
 
 

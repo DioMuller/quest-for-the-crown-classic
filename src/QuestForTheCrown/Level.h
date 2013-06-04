@@ -11,6 +11,7 @@ class Level
 {
 private:
 	std::list<GameObject*> _objects;
+	std::list<GameObject*> _toRemove;
 	WORD _background;
 	char _level[LEVEL_HEIGHT][LEVEL_WIDTH];
 	int _neighbours[4];
@@ -24,11 +25,14 @@ public:
 	void Draw();
 	void Update(double gameTime);
 
-	bool CheckXY(int x, int y);
+	bool CheckXY(int x, int y, bool isProjectile);
 	void HitObjects(int x, int y);
 	int GetNeighbour(Direction direction);
 	void SetNeighbours(int north, int east, int south, int west);
 	void ResetDraw();
 	WORD GetBackground();
+
+	void AddObject(GameObject* object);
+	void RemoveObject(GameObject* object);
 };
 

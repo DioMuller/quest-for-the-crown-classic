@@ -78,7 +78,7 @@ void Player::Update(double gameTime)
 
 		if( new_x != _position.X || new_y != _position.Y )
 		{
-			if( GameManager::CanMoveTo(new_x, new_y) )
+			if( GameManager::CanMoveTo(new_x, new_y, false) )
 			{
 				_position.X = new_x;
 				_position.Y = new_y;

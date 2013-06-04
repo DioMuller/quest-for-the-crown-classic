@@ -92,15 +92,21 @@ void Level::Draw()
 
 void Level::Update(double gameTime)
 {
-	for( std::list<GameObject*>::iterator iterator = _objects.begin(); iterator != _objects.end(); iterator++  )
+	std::list<GameObject*>::iterator iterator;
+	for( iterator = _toRemove.begin(); iterator != _toRemove.end(); iterator++ )
+	{
+		_objects.remove((*iterator));
+	}
+
+	for( iterator = _objects.begin(); iterator != _objects.end(); iterator++  )
 	{
 		(*iterator)->Update(gameTime);
 	}
 }
 
-bool Level::CheckXY(int x, int y)
+bool Level::CheckXY(int x, int y, bool isProjectile)
 {
-	return _level[y-2][x] == ' ';
+	return _level[y-2][x] == ' ' || ( isProjectile && _level[y-2][x] == '#' );
 }
 
 void Level::HitObjects(int x, int y)
@@ -154,4 +160,15 @@ void Level::ResetDraw()
 WORD Level::GetBackground()
 {
 	return _background;
+}
+
+void Level::AddObject(GameObject* object)
+{
+	_objects.push_front(object);
+}
+
+void Level::RemoveObject(GameObject* object)
+{
+	_toRemove.push_front(object);
+	//delete object;
 }

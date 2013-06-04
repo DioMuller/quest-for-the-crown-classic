@@ -36,7 +36,7 @@ class GameManager
 		static WORD GetBackground();
 		static void TryHit(int x, int y);
 		static void HitPlayer(int x, int y);
-		static bool CanMoveTo(int x, int y);
+		static bool CanMoveTo(int x, int y, bool isProjectile);
 		static void ChangeLevel(Direction direction);
 		static void EndGame(bool success);
 		static bool WasSuccessful();
@@ -45,5 +45,8 @@ class GameManager
 		static void SetPlayerPosition(Position position);
 
 		static void GoToDungeon(int dungeon);
+
+		static void AddObject(GameObject* object);
+		static void RemoveObject(GameObject* object);
 };
 

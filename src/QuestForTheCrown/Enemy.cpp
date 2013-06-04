@@ -4,7 +4,9 @@
 #include "Enemy.h"
 #include "GameManager.h"
 #include "Helpers.h"
+#include "Definitions.h"
 
+char* enemyArrows[4] = {"-", "|", "-", "|"};
 
 Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 {
@@ -42,6 +44,18 @@ Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 	_nextMovement = moveCount;
 
 	_direction = LEFT;
+
+	_timeUntilNextAttack = 0;
+
+	//Initialize Weapon
+	if( _type == GOON )
+	{
+		_weapon = new WeaponPart( _position.X, _position.Y, enemyArrows, 1, INDEFINITE, true, true );
+	}
+	else
+	{
+		_weapon = NULL;
+	}
 }
 
 
@@ -104,7 +118,7 @@ void Enemy::Update(double gameTime)
 							break;
 					}
 
-					if( !GameManager::CanMoveTo(new_x, new_y) )
+					if( !GameManager::CanMoveTo(new_x, new_y, false) )
 					{
 						new_x = _position.X;
 						new_y = _position.Y;
@@ -138,17 +152,45 @@ void Enemy::Update(double gameTime)
 					new_x = rand() % 80;
 					new_y = rand() % 25;
 				} 
-				while( !GameManager::CanMoveTo(new_x, new_y) );
+				while( !GameManager::CanMoveTo(new_x, new_y, false) );
 				break;
 			default:
 				break;
 		}
 
 		
-		if( GameManager::CanMoveTo(new_x, new_y ) )
+		if( GameManager::CanMoveTo(new_x, new_y, false ) )
 		{
 			_position.X = new_x;
 			_position.Y = new_y;
+		}
+
+		//Attack
+		if( _weapon != NULL )
+		{
+			if( _timeUntilNextAttack > 0 ) 
+			{
+				_timeUntilNextAttack--;
+			}
+			else
+			{
+				if( _position.X == player.X )
+				{
+					_timeUntilNextAttack = ATTACK_DELAY;
+
+					GameManager::AddObject( _weapon );
+					_weapon->Show(_position.X, _position.Y, (player.Y > _position.Y) ? DOWN : UP);
+				}
+				else if( _position.Y == player.Y )
+				{
+					_timeUntilNextAttack = ATTACK_DELAY;
+
+					GameManager::AddObject( _weapon );
+     				_weapon->Show(_position.X, _position.Y, (player.X > _position.X) ? RIGHT : LEFT);
+				}
+
+
+			}
 		}
 
 		_nextMovement = _moveCount;

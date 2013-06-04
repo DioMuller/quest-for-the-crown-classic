@@ -29,7 +29,7 @@ public:
 	void Update(double gameTime);
 	void Draw();
 	
-	bool CheckXY(int x, int y);
+	bool CheckXY(int x, int y, bool isProjectile);
 	void TryHit(int x, int y);
 
 
@@ -42,6 +42,8 @@ public:
 	void GoToDungeon(int id);
 	void BackToMap();
 
+	void AddObject(GameObject* object);
+	void RemoveObject(GameObject* object);
 private:
 	Level* GetCurrentLevel();
 	void SetCurrentLevel(int level);
