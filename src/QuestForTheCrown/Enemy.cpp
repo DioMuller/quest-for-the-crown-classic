@@ -179,7 +179,7 @@ void Enemy::Update(double gameTime)
 					_timeUntilNextAttack = ATTACK_DELAY;
 
 					GameManager::AddObject( _weapon );
-					_weapon->Show(_position.X, _position.Y, (player.Y > _position.Y) ? DOWN : UP);
+					_weapon->Show(_position.X, _position.Y, (player.Y > _position.Y) ? UP : DOWN);
 				}
 				else if( _position.Y == player.Y )
 				{

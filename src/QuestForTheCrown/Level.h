@@ -24,6 +24,7 @@ public:
 public:
 	void Draw();
 	void Update(double gameTime);
+	void CleanObjects();
 
 	bool CheckXY(int x, int y, bool isProjectile);
 	void HitObjects(int x, int y);
@@ -31,6 +32,7 @@ public:
 	void SetNeighbours(int north, int east, int south, int west);
 	void ResetDraw();
 	WORD GetBackground();
+	char GetChar(Position position);
 
 	void AddObject(GameObject* object);
 	void RemoveObject(GameObject* object);

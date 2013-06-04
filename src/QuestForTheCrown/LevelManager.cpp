@@ -98,6 +98,11 @@ void LevelManager::Draw()
 	GetCurrentLevel()->Draw();
 }
 
+void LevelManager::Clean()
+{
+	GetCurrentLevel()->CleanObjects();
+}
+
 bool LevelManager::CheckXY(int x, int y, bool isProjectile)
 {
 	return GetCurrentLevel()->CheckXY(x,y, isProjectile);
@@ -177,4 +182,9 @@ void LevelManager::AddObject(GameObject* object)
 void LevelManager::RemoveObject(GameObject* object)
 {
 	GetCurrentLevel()->RemoveObject(object);
+}
+
+char LevelManager::GetChar(Position position)
+{
+	return GetCurrentLevel()->GetChar(position);
 }

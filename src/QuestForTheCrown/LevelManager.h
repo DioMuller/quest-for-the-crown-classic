@@ -28,8 +28,10 @@ public:
 
 	void Update(double gameTime);
 	void Draw();
+	void Clean();
 	
 	bool CheckXY(int x, int y, bool isProjectile);
+	char GetChar(Position position);
 	void TryHit(int x, int y);
 
 

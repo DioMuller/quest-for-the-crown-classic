@@ -41,7 +41,7 @@ void GameManager::DrawGame()
 		//For each Game Object -> Draw
 		instance._player->Draw();
 
-		//TODO: DRAW LEVEL
+		//Draw Level
 		instance._manager->Draw();
 		
 		//Draw GUI Bar
@@ -53,6 +53,12 @@ void GameManager::DrawGame()
 			WORD color = instance._player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
 			mostrar( 6 + i, 0, color, "@");
 		}
+}
+
+void GameManager::CleanGame()
+{
+	instance._player->Clean();
+	instance._manager->Clean();
 }
 
 void GameManager::HitPlayer(int x, int y)
@@ -126,4 +132,9 @@ void GameManager::AddObject(GameObject* object)
 void GameManager::RemoveObject(GameObject* object)
 {
 	instance._manager->RemoveObject(object);
+}
+
+char GameManager::GetChar(Position position)
+{
+	return instance._manager->GetChar(position);
 }

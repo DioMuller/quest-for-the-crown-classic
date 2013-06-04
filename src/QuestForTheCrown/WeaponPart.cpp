@@ -62,6 +62,8 @@ void WeaponPart::Update(double gameTime)
 {
 	if( _active > 0 )
 	{
+		GameObject::Update(gameTime);
+
 		int new_x = _position.X + _speedX;
 		int new_y = _position.Y + _speedY;
 
@@ -91,10 +93,11 @@ void WeaponPart::Update(double gameTime)
 
 		_active--;
 
-		if( _active == 0 ) Clean();
-
-		GameObject::Update(gameTime);
-		//mostrar(_position.X, _position.Y, GameManager::GetBackground(), " ");
+		if( _active == 0 )
+		{
+			Clean();
+			mostrar(_position.X, _position.Y, GameManager::GetBackground(), " ");
+		}
 	}
 }
 

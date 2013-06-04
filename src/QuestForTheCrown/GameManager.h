@@ -31,6 +31,7 @@ class GameManager
 	public:
 		static void UpdateGame();
 		static void DrawGame();
+		static void CleanGame();
 
 		static bool IsRunning();
 		static WORD GetBackground();
@@ -40,6 +41,7 @@ class GameManager
 		static void ChangeLevel(Direction direction);
 		static void EndGame(bool success);
 		static bool WasSuccessful();
+		static char GetChar(Position position);
 
 		static Position GetPlayerPosition();
 		static void SetPlayerPosition(Position position);

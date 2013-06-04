@@ -172,3 +172,16 @@ void Level::RemoveObject(GameObject* object)
 	_toRemove.push_front(object);
 	//delete object;
 }
+
+void Level::CleanObjects()
+{
+	for( std::list<GameObject*>::iterator iterator = _objects.begin();  iterator !=  _objects.end();  iterator++  )
+	{
+		(*iterator)->Clean();
+	}
+}
+
+char Level::GetChar(Position position)
+{
+	return _level[position.Y - 2][position.X];
+}
