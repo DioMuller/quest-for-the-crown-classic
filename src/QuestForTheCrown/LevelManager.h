@@ -32,6 +32,7 @@ public:
 	
 	bool CheckXY(int x, int y, bool isProjectile);
 	char GetChar(Position position);
+	bool HasObject(Position position);
 	void TryHit(int x, int y);
 
 

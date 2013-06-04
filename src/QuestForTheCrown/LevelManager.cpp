@@ -188,3 +188,8 @@ char LevelManager::GetChar(Position position)
 {
 	return GetCurrentLevel()->GetChar(position);
 }
+
+bool LevelManager::HasObject(Position position)
+{
+	return GetCurrentLevel()->HasObject(position);
+}

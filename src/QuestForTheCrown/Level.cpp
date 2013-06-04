@@ -106,7 +106,7 @@ void Level::Update(double gameTime)
 
 bool Level::CheckXY(int x, int y, bool isProjectile)
 {
-	return _level[y-2][x] == ' ' || ( isProjectile && _level[y-2][x] == '#' );
+	return !HasObject(Position(x,y)) && (_level[y-2][x] == ' ' || ( isProjectile && _level[y-2][x] == '#' ));
 }
 
 void Level::HitObjects(int x, int y)
@@ -184,4 +184,25 @@ void Level::CleanObjects()
 char Level::GetChar(Position position)
 {
 	return _level[position.Y - 2][position.X];
+}
+
+bool Level::HasObject(Position position)
+{
+	std::list<Enemy*> toRemove;
+	bool finish = false;
+
+	for( std::list<GameObject*>::iterator iterator = _objects.begin();  iterator !=  _objects.end();  iterator++  )
+	{
+		GameObject* obj = (*iterator);
+
+		if( obj != NULL && ((Player*) obj == NULL) )
+		{
+			if( obj->CollidesWith(position.X, position.Y) )
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
 }

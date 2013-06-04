@@ -44,11 +44,11 @@ void GameObject::Clean()
 {
 	if( _oldPosition.X != _position.X || _oldPosition.Y != _position.Y || _forcedraw )
 	{
-		char pos[2];
-		pos[0] = GameManager::GetChar(_position);
-		pos[1] = '\0';
+		char str[2];
+		str[0] = GameManager::GetChar(_oldPosition);
+		str[1] = '\0';
 
-		mostrar(_oldPosition.X, _oldPosition.Y, GameManager::GetBackground(), pos);
+		mostrar(_oldPosition.X, _oldPosition.Y, GameManager::GetBackground() | FOREGROUND_WHITE, str);
 		if( _forcedraw ) mostrar(_position.X, _position.Y, GameManager::GetBackground(), " ");
 	}
 }

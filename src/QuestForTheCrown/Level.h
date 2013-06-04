@@ -33,6 +33,7 @@ public:
 	void ResetDraw();
 	WORD GetBackground();
 	char GetChar(Position position);
+	bool HasObject(Position position);
 
 	void AddObject(GameObject* object);
 	void RemoveObject(GameObject* object);
