@@ -3,6 +3,7 @@
 #include "Weapon.h"
 
 #define MOVE_DELAY 1
+#define NUM_WEAPONS 2
 
 class Player : public GameObject
 {
@@ -16,7 +17,8 @@ class Player : public GameObject
 
 		int _invencibleTime;
 
-		Weapon* _sword;
+		WeaponType _currentWeapon;
+		Weapon* _weapons[NUM_WEAPONS];
 	public:
 		Player(int x, int y);
 		~Player();
@@ -30,7 +32,10 @@ class Player : public GameObject
 		int GetTotalHealth();
 		int GetCurrentHealth();
 
+
 		void SetX( int pos );
 		void SetY( int pos );
+
+		WeaponType GetCurrentWeapon();
 };
 

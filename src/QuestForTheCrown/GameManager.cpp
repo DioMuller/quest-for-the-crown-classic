@@ -53,6 +53,13 @@ void GameManager::DrawGame()
 			WORD color = instance._player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
 			mostrar( 6 + i, 0, color, "@");
 		}
+
+		WORD active = FOREGROUND_BLUE | BACKGROUND_WHITE;
+		WORD inactive = FOREGROUND_WHITE;
+
+		mostrar(20, 0, FOREGROUND_WHITE, "Weapon: ");
+		mostrar(31, 0, instance._player->GetCurrentWeapon() == SWORD ? active : inactive, "SWORD");
+		mostrar(38, 0, instance._player->GetCurrentWeapon() == BOW ? active : inactive, "BOW");
 }
 
 void GameManager::CleanGame()

@@ -18,4 +18,10 @@ enum EnemyType
 	WIZARD = 'W'
 };
 
+enum WeaponType
+{
+	SWORD = 0,
+	BOW = 1
+};
+
 #endif

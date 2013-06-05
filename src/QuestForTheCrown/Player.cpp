@@ -20,14 +20,21 @@ Player::Player(int x, int y) : GameObject(x,y)
 	char* swordHolder[4] = {"=", "I", "=", "I"};
 	char* swordPoint[4] = {"<", "v", ">", "^"};
 
-	_sword = new Weapon(x, y, swordHolder, swordPoint, 0, 15);
+	char* bowHolder[4] = {"(", "u", ")", "^"};
+	char* bowArrow[4] = {"-", "|", "-", "|"};
+
+	_weapons[SWORD] = new Weapon(x, y, swordHolder, swordPoint, 0, 15);
+	_weapons[BOW] = new Weapon(x,y, bowHolder, bowArrow, 1, 15);
+
+	_currentWeapon = SWORD;
 
 	_forcedraw = true;
 }
 
 Player::~Player()
 {
-	delete _sword;
+	for( int i = 0; i < NUM_WEAPONS; i++ )
+		delete _weapons[i];
 }
 
 void Player::Update(double gameTime)
@@ -41,6 +48,8 @@ void Player::Update(double gameTime)
 
 		int new_x = _position.X;
 		int new_y = _position.Y;
+
+		int weapon = (int) _currentWeapon;
 
 		switch (key)
 		{
@@ -57,20 +66,32 @@ void Player::Update(double gameTime)
 				new_x += 1;
 				break;
 			case KEY_LEFT_ACTION:
-				_sword->Show(_position.X,_position.Y, LEFT );
+				_weapons[_currentWeapon]->Show(_position.X,_position.Y, LEFT );
 				_actionFrames = 15;
 				break;
 			case KEY_UP_ACTION:
-				_sword->Show(_position.X,_position.Y, UP );
+				_weapons[_currentWeapon]->Show(_position.X,_position.Y, UP );
 				_actionFrames = 15;
 				break;
 			case KEY_RIGHT_ACTION:
-				_sword->Show(_position.X,_position.Y, RIGHT );
+				_weapons[_currentWeapon]->Show(_position.X,_position.Y, RIGHT );
 				_actionFrames = 15;
 				break;
 			case KEY_DOWN_ACTION:
-				_sword->Show(_position.X,_position.Y, DOWN );
+				_weapons[_currentWeapon]->Show(_position.X,_position.Y, DOWN );
 				_actionFrames = 15;
+				break;
+			case KEY_NEXT_WEAPON:
+				if(  weapon != (NUM_WEAPONS - 1) )
+				{
+					_currentWeapon = (WeaponType) (weapon+1);
+				}
+				break;
+			case KEY_PREV_WEAPON:
+				if(  weapon != 0 )
+				{
+					_currentWeapon = (WeaponType) (weapon-1);
+				}
 				break;
 			default:
 				break;
@@ -98,7 +119,7 @@ void Player::Update(double gameTime)
 		if( _movementDelayTime > 0 ) _movementDelayTime--;
 	}
 
-	_sword->Update(gameTime);
+	_weapons[_currentWeapon]->Update(gameTime);
 
 	GameObject::Update(gameTime);
 }
@@ -109,7 +130,7 @@ void Player::Draw()
 	WORD color = _actionFrames == 0 ? FOREGROUND_WHITE : _color;
 	int dist = _actionFrames == 0? 1 : 3;
 
-	_sword->Draw();
+	_weapons[_currentWeapon]->Draw();
 
 	GameObject::Draw();
 }
@@ -146,4 +167,9 @@ void Player::SetX( int pos )
 void Player::SetY( int pos )
 {
 	_position.Y = pos;
+}
+
+WeaponType Player::GetCurrentWeapon()
+{
+	return _currentWeapon;
 }

@@ -9,6 +9,7 @@ class Weapon
 		
 		WeaponPart* _hold;
 		WeaponPart* _projectile;
+		bool _isProjectile;
 
 	public:
 		Weapon(int x, int y, char* holder[4], char* projectile[4], int speed, int frames);

@@ -14,6 +14,9 @@
 #define KEY_LEFT_ACTION 0x4b
 #define KEY_RIGHT_ACTION 0x4d
 
+#define KEY_NEXT_WEAPON 'e'
+#define KEY_PREV_WEAPON 'q'
+
 #define KEY_PAUSE ' '
 
 class Input
