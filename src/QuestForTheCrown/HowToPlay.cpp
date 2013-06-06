@@ -1,15 +1,9 @@
-#include "TitleScreen.h"
+#include "HowToPlay.h"
 #include "Console.h"
-#include "Input.h"
 
-#define NUM_OPTIONS 3
-
-Option selectedOption = OPTION_NEWGAME;
-
-void TitleScreen::Draw()
+void HowToPlay::Draw()
 {
-    //Only on the first draw.
-	clrscr(FOREGROUND_WHITE);
+    clrscr(FOREGROUND_WHITE);
 	mostrar(0, 0,FOREGROUND_WHITE, "################################################################################");
 	mostrar(0, 1,FOREGROUND_WHITE, "#                                                                              #");
 	mostrar(0, 2,FOREGROUND_WHITE, "#                                                                              #");
@@ -36,45 +30,27 @@ void TitleScreen::Draw()
 	mostrar(0,23,FOREGROUND_WHITE, "#                                                                              #");
 	mostrar(0,24,FOREGROUND_WHITE, "################################################################################");
 
-	mostrar(30, 5, FOREGROUND_YELLOW | FOREGROUND_INTENSITY, "QUEST FOR THE CROWN");
-	mostrar(25, 6, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Author: Diogo Muller de Miranda");
+	mostrar(5, 5, FOREGROUND_WHITE, "   [W]   ");
+	mostrar(5, 6, FOREGROUND_WHITE, "[A][S][D]");
 
-	mostrar(29, 20, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to select.");
+   	mostrar(15, 5, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Use the WASD keys");
+	mostrar(15, 6, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "to      your character.");
+    mostrar(18, 6, FOREGROUND_BLUE | FOREGROUND_INTENSITY, "MOVE");
 
-	gotoxy(0,0);
-}
+    mostrar(5, 10, FOREGROUND_WHITE, "   [^]   ");
+	mostrar(5, 11, FOREGROUND_WHITE, "[<][v][>]");
 
-Option TitleScreen::UpdateDraw()
-{
-    WORD active = FOREGROUND_BLUE | BACKGROUND_WHITE;
-    WORD inactive = FOREGROUND_WHITE;
-    int option = (int) selectedOption;
+   	mostrar(15, 10, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Use the Arrow keys");
+	mostrar(15, 11, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "to        on a specific direction.");
+    mostrar(18, 11, FOREGROUND_RED | FOREGROUND_INTENSITY, "ATTACK");
 
-    mostrar(34, 9, selectedOption == OPTION_NEWGAME ? active : inactive , "Start Game");
-    mostrar(34, 10, selectedOption == OPTION_HOWTOPLAY ? active : inactive , "How to Play");
-    mostrar(34, 11, selectedOption == OPTION_QUIT ? active : inactive , "Quit Game");
+	mostrar(5, 15, FOREGROUND_WHITE, "[Q]   [E]");
 
-    switch(Input::GetInput())
-    {
-        case KEY_UP:
-        case KEY_DOWN_ACTION:
-            if( option > 0 )
-            {
-                selectedOption = (Option) (option - 1);
-            }
-            break;
-        case KEY_DOWN:
-        case KEY_UP_ACTION:
-            if( option < (NUM_OPTIONS - 1) )
-            {
-                selectedOption = (Option) (option + 1);
-            }
-            break;
-        case KEY_PAUSE:
-            return selectedOption;
-        default:
-            break;
-    }
+   	mostrar(15, 15, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Use the 'q' and 'e' keys");
+	mostrar(15, 16, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "to        your weapon.");
+    mostrar(18, 16, FOREGROUND_YELLOW | FOREGROUND_INTENSITY, "CHANGE");
 
-    return OPTION_NONE;
+    mostrar(29, 20, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to return.");
+
+    gotoxy(0,0);
 }

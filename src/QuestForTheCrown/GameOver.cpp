@@ -31,7 +31,7 @@ void GameOver::Draw()
 	mostrar(0,24,FOREGROUND_WHITE, "################################################################################");
 
 	mostrar(34, 11, FOREGROUND_RED | FOREGROUND_INTENSITY, "Game Over");
-	mostrar(25, 12, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to end the game.");
+	mostrar(24, 12, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to return to title.");
 
 	gotoxy(0,0);
 }

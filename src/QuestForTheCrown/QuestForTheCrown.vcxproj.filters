@@ -72,6 +72,9 @@
     <ClInclude Include="Waypoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HowToPlay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp">
@@ -117,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Waypoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HowToPlay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
