@@ -49,7 +49,10 @@ void GameObject::Clean()
 		str[1] = '\0';
 
 		mostrar(_oldPosition.X, _oldPosition.Y, GameManager::GetBackground() | FOREGROUND_WHITE, str);
-		if( _forcedraw ) mostrar(_position.X, _position.Y, GameManager::GetBackground(), " ");
+
+        str[0] = GameManager::GetChar(_position);
+		str[1] = '\0';
+		if( _forcedraw ) mostrar(_position.X, _position.Y, GameManager::GetBackground(), str);
 	}
 }
 

@@ -45,21 +45,26 @@ void GameManager::DrawGame()
 	instance->_manager->Draw();
 		
 	//Draw GUI Bar
+    char lifeBar[2];
+
+    lifeBar[0] = 219;
+    lifeBar[1] = '\0';
+
 	mostrar(0,0,FOREGROUND_WHITE, "Life                                                                            ");
 	mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
 		
 	for( int i = 0; i < instance->_player->GetTotalHealth(); i++ )
 	{
-		WORD color = instance->_player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
-		mostrar( 6 + i, 0, color, "@");
+		WORD color = instance->_player->GetCurrentHealth() > i  ? FOREGROUND_BLUE | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
+		mostrar( 6 + i, 0, color, lifeBar);
 	}
 
 	WORD active = FOREGROUND_BLUE | BACKGROUND_WHITE;
 	WORD inactive = FOREGROUND_WHITE;
 
-	mostrar(20, 0, FOREGROUND_WHITE, "Weapon: ");
-	mostrar(31, 0, instance->_player->GetCurrentWeapon() == SWORD ? active : inactive, "SWORD");
-	mostrar(38, 0, instance->_player->GetCurrentWeapon() == BOW ? active : inactive, "BOW");
+	if( instance->_player->HasWeapon(BOW) ) mostrar(20, 0, FOREGROUND_WHITE, "Weapon: ");
+	if( instance->_player->HasWeapon(BOW) ) mostrar(31, 0, instance->_player->GetCurrentWeapon() == SWORD ? active : inactive, "SWORD");
+	if( instance->_player->HasWeapon(BOW) ) mostrar(38, 0, instance->_player->GetCurrentWeapon() == BOW ? active : inactive, "BOW");
 }
 
 void GameManager::CleanGame()
@@ -193,4 +198,14 @@ void GameManager::InitializeMaps()
 	LevelManager* overworldMap = new LevelManager(overworldLevels, OVERWORLD_LEVELS, dungeons, DUNGEONS, Position(0,0));
 
 	_manager = overworldMap;
+}
+
+void GameManager::AddPlayerWeapon()
+{
+    instance->_player->AddWeapon();
+}
+
+void GameManager::HealPlayer()
+{
+    instance->_player->RestoreHealth();
 }

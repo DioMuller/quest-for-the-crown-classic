@@ -26,5 +26,5 @@ class GameObject
 
 		Position GetPosition();
 
-		bool CollidesWith(int x, int y);
+		virtual bool CollidesWith(int x, int y);
 };

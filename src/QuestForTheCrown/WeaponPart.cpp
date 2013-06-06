@@ -40,7 +40,7 @@ WeaponPart::~WeaponPart()
 {
 }
 	
-void WeaponPart::Show(int x, int y, Direction direction)
+bool WeaponPart::Show(int x, int y, Direction direction)
 {
 	int x_diff = direction == LEFT ? -1 : direction == RIGHT ? 1 : 0;
 	int y_diff = direction == DOWN ? -1 : direction == UP ? 1 : 0;
@@ -56,6 +56,10 @@ void WeaponPart::Show(int x, int y, Direction direction)
 	_active = _frames;
 
 	_sprite = _appearance[_direction];
+
+    _forcedraw = true;
+
+    return GameManager::CanMoveTo(_position.X, _position.Y, _isProjectile);
 }
 
 void WeaponPart::Update(double gameTime)
@@ -96,14 +100,17 @@ void WeaponPart::Update(double gameTime)
 		if( _active == 0 )
 		{
 			Clean();
-			mostrar(_position.X, _position.Y, GameManager::GetBackground(), " ");
+            char str[2];
+		    str[0] = GameManager::GetChar(_position);
+		    str[1] = '\0';
+			mostrar(_position.X, _position.Y, GameManager::GetBackground(), str);
 		}
 	}
 }
 
 void WeaponPart::Draw()
 {
-	if( _active > 0 )
+	if( _active > 0 && GameManager::CanMoveTo(_position.X, _position.Y, _isProjectile) )
 	{
 		GameObject::Draw();
 	}

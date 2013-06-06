@@ -15,12 +15,14 @@ Player::Player(int x, int y) : GameObject(x,y)
 
 	_movementDelayTime = 0;
 
+    _totalWeapons = 1;
+
 	_sprite = "@";
 
 	char* swordHolder[4] = {"=", "I", "=", "I"};
 	char* swordPoint[4] = {"<", "v", ">", "^"};
 
-	char* bowHolder[4] = {"(", "u", ")", "^"};
+	char* bowHolder[4] = {"(", "v", ")", "^"};
 	char* bowArrow[4] = {"-", "|", "-", "|"};
 
 	_weapons[SWORD] = new Weapon(x, y, swordHolder, swordPoint, 0, 15);
@@ -82,7 +84,7 @@ void Player::Update(double gameTime)
 				_actionFrames = 15;
 				break;
 			case KEY_NEXT_WEAPON:
-				if(  weapon != (NUM_WEAPONS - 1) )
+				if(  weapon != (_totalWeapons - 1) )
 				{
 					_currentWeapon = (WeaponType) (weapon+1);
 				}
@@ -172,4 +174,25 @@ void Player::SetY( int pos )
 WeaponType Player::GetCurrentWeapon()
 {
 	return _currentWeapon;
+}
+
+void Player::AddWeapon()
+{
+    _totalWeapons++;
+
+    if( _totalWeapons > NUM_WEAPONS ) _totalWeapons = NUM_WEAPONS;
+}
+
+bool Player::HasWeapon(WeaponType type)
+{
+    return (_totalWeapons - 1) >= ((int) type);
+}
+
+void Player::RestoreHealth()
+{
+    if( _currentHealth < _totalHealth ) _currentHealth++;
+}
+void Player::UpgradeHealth()
+{
+    _totalHealth++;
 }

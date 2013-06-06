@@ -1,6 +1,8 @@
 ﻿#include "Level.h"
 #include "GameManager.h"
 #include "Waypoint.h"
+#include "WeaponPickup.h"
+#include "LifePickup.h"
 
 
 Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background)
@@ -25,6 +27,10 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
 				case 'G':
 					_level[i][j] = '#';
 					break;
+                case 'D':
+                    _objects.push_back(new WeaponPickup(j, i+2));
+                    _level[i][j] = ' ';
+                    break;
 				case (char) SLIME:
 				case (char) GOON:
 				case (char) BAT:
@@ -126,6 +132,14 @@ void Level::HitObjects(int x, int y)
 			}
 		}
 	}
+
+    if( toRemove.size() != 0 )
+    {
+        if( rand() % 3 == 1 )
+        {
+            _objects.push_front( new LifePickup( x, y ) );
+        }
+    }
 
 	for( std::list<Enemy*>::iterator iterator = toRemove.begin(); iterator != toRemove.end(); iterator++ )
 	{

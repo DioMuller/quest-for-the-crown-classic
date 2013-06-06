@@ -45,6 +45,8 @@ class GameManager
 
 		static Position GetPlayerPosition();
 		static void SetPlayerPosition(Position position);
+        static void AddPlayerWeapon();
+        static void HealPlayer();
 
 		static void ResetGame();
 

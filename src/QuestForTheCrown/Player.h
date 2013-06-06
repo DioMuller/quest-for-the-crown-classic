@@ -17,6 +17,8 @@ class Player : public GameObject
 
 		int _invencibleTime;
 
+        int _totalWeapons;
+
 		WeaponType _currentWeapon;
 		Weapon* _weapons[NUM_WEAPONS];
 	public:
@@ -31,11 +33,16 @@ class Player : public GameObject
 		void Hit();
 		int GetTotalHealth();
 		int GetCurrentHealth();
+        void RestoreHealth();
+        void UpgradeHealth();
 
 
 		void SetX( int pos );
 		void SetY( int pos );
 
 		WeaponType GetCurrentWeapon();
+
+        void AddWeapon();
+        bool HasWeapon(WeaponType type);
 };
 

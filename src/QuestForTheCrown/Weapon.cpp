@@ -17,8 +17,10 @@ Weapon::~Weapon()
 
 void Weapon::Show(int x, int y, Direction direction)
 {
-	_hold->Show(x,y,direction);
-	_projectile->Show(_hold->GetPosition().X, _hold->GetPosition().Y, direction);
+	if( _hold->Show(x,y,direction) )
+    {
+        _projectile->Show(_hold->GetPosition().X, _hold->GetPosition().Y, direction);
+    }
 }
 
 void Weapon::Update(double gameTime)
@@ -29,6 +31,6 @@ void Weapon::Update(double gameTime)
 
 void Weapon::Draw()
 {
-	_hold->Draw();
-	_projectile->Draw();
+    _hold->Draw();
+    _projectile->Draw();
 }

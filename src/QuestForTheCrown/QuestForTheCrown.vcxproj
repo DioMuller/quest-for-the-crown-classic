@@ -90,6 +90,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LifePickup.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="TitleScreen.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="Waypoint.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponPart.h" />
+    <ClInclude Include="WeaponPickup.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp" />
@@ -110,12 +112,14 @@
     <ClCompile Include="HowToPlay.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LifePickup.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="VictoryScreen.cpp" />
     <ClCompile Include="Waypoint.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponPart.cpp" />
+    <ClCompile Include="WeaponPickup.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

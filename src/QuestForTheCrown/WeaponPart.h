@@ -23,7 +23,7 @@ class WeaponPart :	public GameObject
 		~WeaponPart();
 
 	public: 		
-		void Show(int x, int y, Direction direction);
+		bool Show(int x, int y, Direction direction);
 		void Hide();
 
 		void Update(double gameTime);
