@@ -27,6 +27,8 @@ class Input
 			if (_kbhit())
 			{
 				char c = _getch();
+
+				while(_kbhit()) c = _getch();
 				
 				return c;
 			}
