@@ -46,9 +46,14 @@ class GameManager
 		static Position GetPlayerPosition();
 		static void SetPlayerPosition(Position position);
 
+		static void ResetGame();
+
 		static void GoToDungeon(int dungeon);
 
 		static void AddObject(GameObject* object);
 		static void RemoveObject(GameObject* object);
+
+	private:
+		void InitializeMaps();
 };
 

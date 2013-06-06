@@ -5,11 +5,27 @@
 
 LevelManager::LevelManager(Level** levels, int levelCount, LevelManager** dungeons, int dungeonCount, Position startPoint)
 {
-	_levelCount = levelCount;
+    int i;
+	
+    _levelCount = levelCount;
 	_dungeonCount = dungeonCount;
 
-	_levels = levels;
-	_dungeons = dungeons;
+	_levels = new Level*[levelCount];//levels;
+	
+    for( i = 0; i < levelCount; i++)
+    {
+        _levels[i] = levels[i];
+    }
+
+    if(dungeons) 
+    {
+        _dungeons = new LevelManager*[dungeonCount];
+
+        for( i = 0; i < dungeonCount; i++)
+        {
+            _dungeons[i] = dungeons[i];
+        }
+    }
 
 	_currentLevel = 0;
 	_currentDungeon = -1;

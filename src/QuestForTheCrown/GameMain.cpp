@@ -7,28 +7,35 @@
 
 int main(int argc, char **argv)
 {
-	TitleScreen::Draw();
-	while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
+	bool running = true;
 
-	//Main Game Loop
-	while( GameManager::IsRunning() )
-	{	
-		GameManager::UpdateGame();
-		GameManager::DrawGame();
-
-		Sleep(17);
-	}
-
-	//Game Over Loop
-	if( GameManager::WasSuccessful() )
+	while(running)
 	{
-		VictoryScreen::Draw();
+		TitleScreen::Draw();
+		while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
+
+		//Main Game Loop
+		GameManager::ResetGame();
+
+		while( GameManager::IsRunning() )
+		{	
+			GameManager::UpdateGame();
+			GameManager::DrawGame();
+
+			Sleep(17);
+		}
+
+		//Game Over Loop
+		if( GameManager::WasSuccessful() )
+		{
+			VictoryScreen::Draw();
+		}
+		else
+		{
+			GameOver::Draw();
+		}
+		while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
 	}
-	else
-	{
-		GameOver::Draw();
-	}
-	while( Input::GetInput() != KEY_PAUSE ) Sleep(17);
 
 	//End of the Game
 	return 0;

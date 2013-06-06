@@ -4,4 +4,3 @@ class GameOver
 	public:
 		static void Draw();
 };
-
