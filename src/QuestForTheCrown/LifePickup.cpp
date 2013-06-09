@@ -4,7 +4,7 @@
 LifePickup::LifePickup(int x, int y) : GameObject(x,y)
 {
     _sprite = "+";
-    _color = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+    _color = FOREGROUND_RED | FOREGROUND_INTENSITY;
 
     _forcedraw = true;
 }

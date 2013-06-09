@@ -4,6 +4,7 @@
 #include "Player.h"
 #include <list>
 #include "LevelManager.h"
+#include "Definitions.h"
 
 class GameManager
 {
@@ -20,6 +21,8 @@ class GameManager
 		//Levels
 		//TODO: Level Manager
 		LevelManager *_manager;
+
+        bool _dungeonsDone[DUNGEONS];
 
 		//Player Reference
 		Player* _player;
@@ -47,6 +50,9 @@ class GameManager
 		static void SetPlayerPosition(Position position);
         static void AddPlayerWeapon();
         static void HealPlayer();
+        static void AddPlayerHealth();
+
+        static void ReturnToEntrance();
 
 		static void ResetGame();
 
@@ -54,6 +60,9 @@ class GameManager
 
 		static void AddObject(GameObject* object);
 		static void RemoveObject(GameObject* object);
+
+        static void FinishDungeon(int x);
+        static bool GetDungeonFinished(int x);
 
 	private:
 		void InitializeMaps();

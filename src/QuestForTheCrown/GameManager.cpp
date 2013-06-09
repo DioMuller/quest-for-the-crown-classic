@@ -17,6 +17,11 @@ GameManager::GameManager()
 	_isRunning = true;
 	_initialized = true;
 	_success = false;
+
+    for( int i = 0; i < DUNGEONS; i++ )
+    {
+        _dungeonsDone[i] = false;;
+    }
 }
 
 GameManager::~GameManager()
@@ -45,18 +50,13 @@ void GameManager::DrawGame()
 	instance->_manager->Draw();
 		
 	//Draw GUI Bar
-    char lifeBar[2];
-
-    lifeBar[0] = 219;
-    lifeBar[1] = '\0';
-
 	mostrar(0,0,FOREGROUND_WHITE, "Life                                                                            ");
 	mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
 		
 	for( int i = 0; i < instance->_player->GetTotalHealth(); i++ )
 	{
-		WORD color = instance->_player->GetCurrentHealth() > i  ? FOREGROUND_BLUE | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
-		mostrar( 6 + i, 0, color, lifeBar);
+		WORD color = instance->_player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
+		mostrar( 6 + i, 0, color, "@");
 	}
 
 	WORD active = FOREGROUND_BLUE | BACKGROUND_WHITE;
@@ -208,4 +208,26 @@ void GameManager::AddPlayerWeapon()
 void GameManager::HealPlayer()
 {
     instance->_player->RestoreHealth();
+}
+
+void GameManager::FinishDungeon(int x)
+{
+    if( x >= 0 && x < DUNGEONS ) instance->_dungeonsDone[x] = true;
+}
+        
+bool GameManager::GetDungeonFinished(int x)
+{
+    if( x >= 0 && x < DUNGEONS ) return instance->_dungeonsDone[x];
+
+    return false;
+}
+
+void GameManager::AddPlayerHealth()
+{
+    instance->_player->UpgradeHealth();
+}
+
+void GameManager::ReturnToEntrance()
+{
+    instance->_manager->BackToMap();
 }

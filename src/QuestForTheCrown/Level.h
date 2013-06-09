@@ -16,6 +16,9 @@ private:
 	char _level[LEVEL_HEIGHT][LEVEL_WIDTH];
 	int _neighbours[4];
 	bool _redraw;
+    std::list<Position> _locks;
+
+    int _isDungeon;
 
 public:
 	Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background);

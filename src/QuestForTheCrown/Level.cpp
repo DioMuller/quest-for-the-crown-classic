@@ -9,6 +9,8 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
 {
 	_background = background;
 
+    _isDungeon = -1;
+
 	for( int i = 0; i < LEVEL_HEIGHT; i++ )
 	{
 		//Yes, I could use memcpy(_level[i], map[i], LEVEL_WIDTH);
@@ -31,10 +33,15 @@ Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD backgr
                     _objects.push_back(new WeaponPickup(j, i+2));
                     _level[i][j] = ' ';
                     break;
+                case 'L':
+                    _level[i][j] = ']';
+                    _locks.push_back(Position(j,i));
+                    break; 
+   				case (char) WORM:
+                    _isDungeon = 0;
 				case (char) SLIME:
 				case (char) GOON:
 				case (char) BAT:
-				case (char) WORM:
 				case (char) WIZARD:
 					_objects.push_back(new Enemy( j, i + 2, (EnemyType) map[i][j]));
 					_level[i][j] = ' ';
@@ -98,6 +105,27 @@ void Level::Draw()
 
 void Level::Update(double gameTime)
 {
+    if( _redraw )
+    {
+        if( GameManager::GetDungeonFinished(0) )
+        {
+            std::list<Position>::iterator iterator;
+            std::list<Position> toRemove;
+
+            for( iterator = _locks.begin(); iterator != _locks.end(); iterator++ )
+            {
+                _level[(*iterator).Y][(*iterator).X] = ' ';
+
+                toRemove.push_back((*iterator));
+            }
+
+            for( iterator = toRemove.begin(); iterator != toRemove.end(); iterator++ )
+            {
+                _locks.push_back((*iterator));
+            }
+        }
+    }
+
 	std::list<GameObject*>::iterator iterator;
 	for( iterator = _toRemove.begin(); iterator != _toRemove.end(); iterator++ )
 	{
@@ -133,7 +161,7 @@ void Level::HitObjects(int x, int y)
 		}
 	}
 
-    if( toRemove.size() != 0 )
+    if( toRemove.size() != 0 && _isDungeon == -1 )
     {
         if( rand() % 3 == 1 )
         {
@@ -149,6 +177,14 @@ void Level::HitObjects(int x, int y)
 
 		delete (Enemy*) (*iterator);
 	}
+
+    if( _isDungeon != -1 && _objects.size() == 0 )
+    {
+        GameManager::FinishDungeon(_isDungeon);
+        GameManager::AddPlayerHealth();
+        GameManager::HealPlayer();
+        GameManager::ReturnToEntrance();
+    }
 
 	if( finish ) GameManager::EndGame(true);
 }
