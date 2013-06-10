@@ -10,6 +10,7 @@ class Weapon
 		WeaponPart* _hold;
 		WeaponPart* _projectile;
 		bool _isProjectile;
+        int _ammo;
 
 	public:
 		Weapon(int x, int y, char* holder[4], char* projectile[4], int speed, int frames);
@@ -20,5 +21,7 @@ class Weapon
 
 		void Update(double gameTime);
 		void Draw();
+        int GetAmmo();
+        void AddAmmo(int toAdd);
 };
 

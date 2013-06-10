@@ -51,6 +51,9 @@ class GameManager
         static void AddPlayerWeapon();
         static void HealPlayer();
         static void AddPlayerHealth();
+        static int GetAmmo(WeaponType weapon);
+        static void AddAmmo(WeaponType weapon, int toAdd);
+        static bool HasWeapon(WeaponType weapon);
 
         static void ReturnToEntrance();
 

@@ -65,6 +65,8 @@ void GameManager::DrawGame()
 	if( instance->_player->HasWeapon(BOW) ) mostrar(20, 0, FOREGROUND_WHITE, "Weapon: ");
 	if( instance->_player->HasWeapon(BOW) ) mostrar(31, 0, instance->_player->GetCurrentWeapon() == SWORD ? active : inactive, "SWORD");
 	if( instance->_player->HasWeapon(BOW) ) mostrar(38, 0, instance->_player->GetCurrentWeapon() == BOW ? active : inactive, "BOW");
+    if( instance->_player->HasWeapon(BOW) ) mostrar(31, 1, FOREGROUND_WHITE, "Arrows: ");
+    if( instance->_player->HasWeapon(BOW) ) mostrar(38, 1, FOREGROUND_WHITE, GetAmmo(BOW));
 }
 
 void GameManager::CleanGame()
@@ -230,4 +232,19 @@ void GameManager::AddPlayerHealth()
 void GameManager::ReturnToEntrance()
 {
     instance->_manager->BackToMap();
+}
+
+int GameManager::GetAmmo(WeaponType weapon)
+{
+    return instance->_player->GetAmmo(weapon);
+}
+
+void GameManager::AddAmmo(WeaponType weapon, int toAdd)
+{
+    instance->_player->AddAmmo(weapon, toAdd);
+}
+
+bool GameManager::HasWeapon(WeaponType weapon)
+{
+    return instance->_player->HasWeapon(weapon);
 }

@@ -12,7 +12,7 @@ WeaponPart::WeaponPart(int x, int y, char* appearance[4], int speed, int frames,
 	_speed = speed;
 	_frames = frames;
 
-	_color = isEnemy? (FOREGROUND_RED | FOREGROUND_INTENSITY) : FOREGROUND_WHITE;
+	_color = isEnemy? (FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY) : FOREGROUND_WHITE;
 
 	_active = 0;
 	_isProjectile = isProjectile;

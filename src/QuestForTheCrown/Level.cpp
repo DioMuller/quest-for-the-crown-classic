@@ -3,6 +3,7 @@
 #include "Waypoint.h"
 #include "WeaponPickup.h"
 #include "LifePickup.h"
+#include "AmmoPickup.h"
 
 
 Level::Level(char map[LEVEL_HEIGHT][LEVEL_WIDTH], int neighbours[4], WORD background)
@@ -163,9 +164,15 @@ void Level::HitObjects(int x, int y)
 
     if( toRemove.size() != 0 && _isDungeon == -1 )
     {
-        if( rand() % 3 == 1 )
+        int chance = rand() % 3;
+        
+        if( chance == 1 )
         {
             _objects.push_front( new LifePickup( x, y ) );
+        }
+        else if( chance == 2 && GameManager::HasWeapon(BOW) )
+        {
+            _objects.push_front( new AmmoPickup( x, y ) );
         }
     }
 

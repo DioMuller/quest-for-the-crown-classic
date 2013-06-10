@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AmmoPickup.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Enemy.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="WeaponPickup.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AmmoPickup.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameMain.cpp" />

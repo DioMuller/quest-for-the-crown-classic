@@ -196,3 +196,13 @@ void Player::UpgradeHealth()
 {
     _totalHealth++;
 }
+
+int Player::GetAmmo(WeaponType weapon)
+{
+    return _weapons[weapon]->GetAmmo();
+}
+
+void Player::AddAmmo(WeaponType weapon, int toAdd)
+{
+    _weapons[weapon]->AddAmmo(toAdd);
+}

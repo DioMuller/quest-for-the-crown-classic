@@ -36,6 +36,9 @@ class Player : public GameObject
         void RestoreHealth();
         void UpgradeHealth();
 
+        int GetAmmo(WeaponType weapon);
+        void AddAmmo(WeaponType weapon, int toAdd);
+
 
 		void SetX( int pos );
 		void SetY( int pos );
