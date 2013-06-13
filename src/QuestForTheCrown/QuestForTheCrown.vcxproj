@@ -101,6 +101,7 @@
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponPart.h" />
     <ClInclude Include="WeaponPickup.h" />
+    <ClInclude Include="XboxController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmmoPickup.cpp" />
@@ -112,6 +113,7 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="HowToPlay.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="LifePickup.cpp" />
@@ -122,6 +124,7 @@
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponPart.cpp" />
     <ClCompile Include="WeaponPickup.cpp" />
+    <ClCompile Include="XboxController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

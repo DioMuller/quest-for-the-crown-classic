@@ -1,6 +1,5 @@
 #pragma once
-
-#include <conio.h>
+#include "XboxController.h"
 
 #define KEY_NONE '\0'
 
@@ -19,21 +18,21 @@
 
 #define KEY_PAUSE ' '
 
+#define INPUT_DELAY 3
+
 class Input
 {
-	public:
-		static char GetInput()
-		{
-			if (_kbhit())
-			{
-				char c = _getch();
-
-				while(_kbhit()) c = _getch();
-				
-				return c;
-			}
-
-			return KEY_NONE;
-		}
+    private:
+        XboxController* _controller;
+        int _timeSinceLastInput;
+        char _lastKey;
+    public:
+        Input();
+        ~Input();
+	private:
+        void NormalizeSticks(float* LX, float* LY, float* RX, float* RY );
+        char GetControllerInput();
+    public:
+		static char GetInput();
 };
 
