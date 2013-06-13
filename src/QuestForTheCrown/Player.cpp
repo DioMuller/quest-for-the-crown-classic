@@ -31,6 +31,7 @@ Player::Player(int x, int y) : GameObject(x,y)
 	_currentWeapon = SWORD;
 
 	_forcedraw = true;
+    _updateGUI = true;
 }
 
 Player::~Player()
@@ -70,29 +71,35 @@ void Player::Update(double gameTime)
 			case KEY_LEFT_ACTION:
 				_weapons[_currentWeapon]->Show(_position.X,_position.Y, LEFT );
 				_actionFrames = 15;
+                SetUpdateGui(true);
 				break;
 			case KEY_UP_ACTION:
 				_weapons[_currentWeapon]->Show(_position.X,_position.Y, UP );
 				_actionFrames = 15;
+                SetUpdateGui(true);
 				break;
 			case KEY_RIGHT_ACTION:
 				_weapons[_currentWeapon]->Show(_position.X,_position.Y, RIGHT );
 				_actionFrames = 15;
+                SetUpdateGui(true);
 				break;
 			case KEY_DOWN_ACTION:
 				_weapons[_currentWeapon]->Show(_position.X,_position.Y, DOWN );
 				_actionFrames = 15;
+                SetUpdateGui(true);
 				break;
 			case KEY_NEXT_WEAPON:
 				if(  weapon != (_totalWeapons - 1) )
 				{
 					_currentWeapon = (WeaponType) (weapon+1);
+                    SetUpdateGui(true);
 				}
 				break;
 			case KEY_PREV_WEAPON:
 				if(  weapon != 0 )
 				{
 					_currentWeapon = (WeaponType) (weapon-1);
+                    SetUpdateGui(true);
 				}
 				break;
 			default:
@@ -143,6 +150,7 @@ void Player::Hit()
 	{
 		_currentHealth --;
 		_invencibleTime = 30;
+        SetUpdateGui(true);
 
 		if( _currentHealth <= 0 )
 		{
@@ -181,6 +189,8 @@ void Player::AddWeapon()
     _totalWeapons++;
 
     if( _totalWeapons > NUM_WEAPONS ) _totalWeapons = NUM_WEAPONS;
+
+    SetUpdateGui(true);
 }
 
 bool Player::HasWeapon(WeaponType type)
@@ -191,10 +201,12 @@ bool Player::HasWeapon(WeaponType type)
 void Player::RestoreHealth()
 {
     if( _currentHealth < _totalHealth ) _currentHealth++;
+    SetUpdateGui(true);
 }
 void Player::UpgradeHealth()
 {
     _totalHealth++;
+    SetUpdateGui(true);
 }
 
 int Player::GetAmmo(WeaponType weapon)
@@ -205,4 +217,15 @@ int Player::GetAmmo(WeaponType weapon)
 void Player::AddAmmo(WeaponType weapon, int toAdd)
 {
     _weapons[weapon]->AddAmmo(toAdd);
+    SetUpdateGui(true);
+}
+
+bool Player::GetUpdateGui()
+{
+    return _updateGUI;
+}
+
+void Player::SetUpdateGui(bool value)
+{
+    _updateGUI = value;
 }

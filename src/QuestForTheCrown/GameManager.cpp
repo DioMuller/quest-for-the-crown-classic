@@ -50,23 +50,28 @@ void GameManager::DrawGame()
 	instance->_manager->Draw();
 		
 	//Draw GUI Bar
-	mostrar(0,0,FOREGROUND_WHITE, "Life                                                                            ");
-	mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
+    if( instance->_player->GetUpdateGui() )
+    {
+	    mostrar(0,0,FOREGROUND_WHITE, "Life                                                                            ");
+	    mostrar(0,1,FOREGROUND_WHITE, "                                                                                ");
 		
-	for( int i = 0; i < instance->_player->GetTotalHealth(); i++ )
-	{
-		WORD color = instance->_player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
-		mostrar( 6 + i, 0, color, "@");
-	}
+	    for( int i = 0; i < instance->_player->GetTotalHealth(); i++ )
+	    {
+		    WORD color = instance->_player->GetCurrentHealth() > i  ? FOREGROUND_RED | FOREGROUND_INTENSITY : FOREGROUND_WHITE;
+		    mostrar( 6 + i, 0, color, "@");
+	    }
 
-	WORD active = FOREGROUND_BLUE | BACKGROUND_WHITE;
-	WORD inactive = FOREGROUND_WHITE;
+	    WORD active = FOREGROUND_BLUE | BACKGROUND_WHITE;
+	    WORD inactive = FOREGROUND_WHITE;
 
-	if( instance->_player->HasWeapon(BOW) ) mostrar(20, 0, FOREGROUND_WHITE, "Weapon: ");
-	if( instance->_player->HasWeapon(BOW) ) mostrar(31, 0, instance->_player->GetCurrentWeapon() == SWORD ? active : inactive, "SWORD");
-	if( instance->_player->HasWeapon(BOW) ) mostrar(38, 0, instance->_player->GetCurrentWeapon() == BOW ? active : inactive, "BOW");
-    if( instance->_player->HasWeapon(BOW) ) mostrar(31, 1, FOREGROUND_WHITE, "Arrows: ");
-    if( instance->_player->HasWeapon(BOW) ) mostrar(38, 1, FOREGROUND_WHITE, GetAmmo(BOW));
+	    if( instance->_player->HasWeapon(BOW) ) mostrar(20, 0, FOREGROUND_WHITE, "Weapon: ");
+	    if( instance->_player->HasWeapon(BOW) ) mostrar(31, 0, instance->_player->GetCurrentWeapon() == SWORD ? active : inactive, "SWORD");
+	    if( instance->_player->HasWeapon(BOW) ) mostrar(38, 0, instance->_player->GetCurrentWeapon() == BOW ? active : inactive, "BOW");
+        if( instance->_player->HasWeapon(BOW) ) mostrar(31, 1, FOREGROUND_WHITE, "Arrows: ");
+        if( instance->_player->HasWeapon(BOW) ) mostrar(38, 1, FOREGROUND_WHITE, GetAmmo(BOW));
+
+        instance->_player->SetUpdateGui(false);
+    }
 }
 
 void GameManager::CleanGame()

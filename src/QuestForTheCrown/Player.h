@@ -19,6 +19,8 @@ class Player : public GameObject
 
         int _totalWeapons;
 
+        bool _updateGUI;
+
 		WeaponType _currentWeapon;
 		Weapon* _weapons[NUM_WEAPONS];
 	public:
@@ -47,5 +49,8 @@ class Player : public GameObject
 
         void AddWeapon();
         bool HasWeapon(WeaponType type);
+
+        bool GetUpdateGui();
+        void SetUpdateGui(bool value);
 };
 
