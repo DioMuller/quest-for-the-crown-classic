@@ -36,10 +36,22 @@ void TitleScreen::Draw()
 	mostrar(0,23,FOREGROUND_WHITE, "#                                                                              #");
 	mostrar(0,24,FOREGROUND_WHITE, "################################################################################");
 
-	mostrar(30, 5, FOREGROUND_YELLOW | FOREGROUND_INTENSITY, "QUEST FOR THE CROWN");
-	mostrar(25, 6, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Author: Diogo Muller de Miranda");
+	mostrar(1, 2, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "      e88 88e                             d8      dP,e,                  ");
+	mostrar(1, 3, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "     d888 888b  8888 8888  ,e e,   dP\"Y  d88      8b \"   e88 88e  888,8, ");
+	mostrar(1, 4, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "    C8888 8888D 8888 8888 d88 88b C88b  d88888   888888 d888 888b 888 \"  ");
+	mostrar(1, 5, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "     Y888 888P  Y888 888P 888   ,  Y88D  888      888   Y888 888P 888    ");
+	mostrar(1, 6, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "      \"88 88\"    \"88 88\"   \"YeeP\" d,dP   888      888    \"88 88\"  888    ");
+	mostrar(1, 7, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "          b                                                              ");
+	mostrar(1, 8, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "          8b,                                                            ");
+	mostrar(1, 9, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "    d8   888                 e88'Y88                                        ");
+	mostrar(1, 10, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "   d88   888 ee   ,e e,     d888  'Y 888,8,  e88 88e  Y8b Y8b Y888P 888 8e  ");
+	mostrar(1, 11, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "  d88888 888 88b d88 88b   C8888     888 \"  d888 888b  Y8b Y8b Y8P  888 88b ");
+	mostrar(1, 12, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "   888   888 888 888   ,    Y888  ,d 888    Y888 888P   Y8b Y8b \"   888 888 ");
+	mostrar(1, 13, FOREGROUND_YELLOW | FOREGROUND_INTENSITY,  "   888   888 888  \"YeeP\"     \"88,d88 888     \"88 88\"     YP  Y8P    888 888 ");
 
-	mostrar(29, 20, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to select.");
+	mostrar(25, 15, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Author: Diogo Muller de Miranda");
+
+	mostrar(29, 22, FOREGROUND_WHITE | FOREGROUND_INTENSITY, "Press SPACE to select.");
 
 	gotoxy(0,0);
 }
@@ -50,9 +62,9 @@ Option TitleScreen::UpdateDraw()
     WORD inactive = FOREGROUND_WHITE;
     int option = (int) selectedOption;
 
-    mostrar(34, 9, selectedOption == OPTION_NEWGAME ? active : inactive , "Start Game");
-    mostrar(34, 10, selectedOption == OPTION_HOWTOPLAY ? active : inactive , "How to Play");
-    mostrar(34, 11, selectedOption == OPTION_QUIT ? active : inactive , "Quit Game");
+    mostrar(34, 17, selectedOption == OPTION_NEWGAME ? active : inactive , "Start Game");
+    mostrar(34, 18, selectedOption == OPTION_HOWTOPLAY ? active : inactive , "How to Play");
+    mostrar(34, 19, selectedOption == OPTION_QUIT ? active : inactive , "Quit Game");
 
     switch(Input::GetInput())
     {
