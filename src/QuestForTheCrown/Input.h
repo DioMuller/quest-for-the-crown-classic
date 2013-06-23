@@ -26,6 +26,7 @@ class Input
         XboxController* _controller;
         int _timeSinceLastInput;
         char _lastKey;
+        int _vibrationTime;
     public:
         Input();
         ~Input();
@@ -33,6 +34,7 @@ class Input
         void NormalizeSticks(float* LX, float* LY, float* RX, float* RY );
         char GetControllerInput();
     public:
+        static void Rumble(int intensity);
 		static char GetInput();
 };
 

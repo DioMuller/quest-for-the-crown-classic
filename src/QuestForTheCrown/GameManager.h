@@ -39,7 +39,7 @@ class GameManager
 		static bool IsRunning();
 		static WORD GetBackground();
 		static void TryHit(int x, int y);
-		static void HitPlayer(int x, int y);
+		static bool HitPlayer(int x, int y);
 		static bool CanMoveTo(int x, int y, bool isProjectile);
 		static void ChangeLevel(Direction direction);
 		static void EndGame(bool success);

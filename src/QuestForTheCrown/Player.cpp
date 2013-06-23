@@ -148,8 +148,9 @@ void Player::Hit()
 {
 	if( _invencibleTime <= 0 )
 	{
+        Input::Rumble(100);
 		_currentHealth --;
-		_invencibleTime = 30;
+		_invencibleTime = 60;
         SetUpdateGui(true);
 
 		if( _currentHealth <= 0 )

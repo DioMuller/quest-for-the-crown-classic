@@ -13,6 +13,7 @@ class Enemy : public GameObject
 		EnemyType _type;
 		//Will be used only with enemies with pattern movements.
 		Direction _direction;
+        int _awayTime;
 
 		WeaponPart* _weapon;
 

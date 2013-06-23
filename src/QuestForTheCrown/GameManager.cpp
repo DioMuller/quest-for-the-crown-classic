@@ -80,12 +80,15 @@ void GameManager::CleanGame()
 	instance->_manager->Clean();
 }
 
-void GameManager::HitPlayer(int x, int y)
+bool GameManager::HitPlayer(int x, int y)
 {
 	if( instance->_player->CollidesWith(x,y) )
 	{
 		instance->_player->Hit();
+        return true;
 	}
+
+    return false;
 }
 
 bool GameManager::IsRunning()

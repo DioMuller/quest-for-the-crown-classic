@@ -12,6 +12,7 @@ Enemy::Enemy(int x, int y, EnemyType type) : GameObject(x,y)
 {
 	int moveCount = 0;
 	_type = type;
+    _awayTime = 0;
 
 	switch (_type)
 	{
@@ -78,85 +79,103 @@ void Enemy::Update(double gameTime)
 		int new_x = _position.X;
 		int new_y = _position.Y;
 
-		switch (_type)
-		{
-			case SLIME:
-				new_x = _position.X + (rand() % 3) - 1; //-1, 0, 1
-				new_y = _position.Y + (rand() % 3) - 1; //-1, 0, 1
-				break;
-			case GOON:
-			case BAT:
-				if( abs(diff_x) >= abs(diff_y) )
-				{
-					if( diff_x < 0 ) new_x--; //If less, but not equal to zero
-					else if (diff_x > 0 ) new_x++; //If more, but not equal to zero
-				}
-				else
-				{
-					if( diff_y < 0 ) new_y--; //If less, but not equal to zero
-					else if (diff_y > 0 ) new_y++; //If more, but not equal to zero
-				}
-				break;
-			case WORM:
-				do
-				{
-					switch (_direction)
-					{
-						case UP:
-							new_y--;
-							break;
-						case DOWN:
-							new_y++;
-							break;
-						case LEFT:
-							new_x--;
-							break;
-						case RIGHT:
-							new_x++;
-							break;
-						default:
-							break;
-					}
+        if( _awayTime > 0 )
+        {
+  			if( abs(diff_x) >= abs(diff_y) )
+			{
+				if( diff_x < 0 ) new_x++; //If less, but not equal to zero
+				else if (diff_x > 0 ) new_x--; //If more, but not equal to zero
+			}
+			else
+			{
+				if( diff_y < 0 ) new_y++; //If less, but not equal to zero
+				else if (diff_y > 0 ) new_y--; //If more, but not equal to zero
+			}
 
-					if( !GameManager::CanMoveTo(new_x, new_y, false) )
-					{
-						new_x = _position.X;
-						new_y = _position.Y;
+            _awayTime--;
+        }
+        else
+        {
+		    switch (_type)
+		    {
+			    case SLIME:
+				    new_x = _position.X + (rand() % 3) - 1; //-1, 0, 1
+				    new_y = _position.Y + (rand() % 3) - 1; //-1, 0, 1
+				    break;
+			    case GOON:
+			    case BAT:
+				    if( abs(diff_x) >= abs(diff_y) )
+				    {
+					    if( diff_x < 0 ) new_x--; //If less, but not equal to zero
+					    else if (diff_x > 0 ) new_x++; //If more, but not equal to zero
+				    }
+				    else
+				    {
+					    if( diff_y < 0 ) new_y--; //If less, but not equal to zero
+					    else if (diff_y > 0 ) new_y++; //If more, but not equal to zero
+				    }
+				    break;
+			    case WORM:
+				    do
+				    {
+					    switch (_direction)
+					    {
+						    case UP:
+							    new_y--;
+							    break;
+						    case DOWN:
+							    new_y++;
+							    break;
+						    case LEFT:
+							    new_x--;
+							    break;
+						    case RIGHT:
+							    new_x++;
+							    break;
+						    default:
+							    break;
+					    }
 
-						switch( _direction )
-						{
-							case LEFT:
-								_direction = UP;
-								break;
-							case UP:
-								_direction = RIGHT;
-								break;
-							case RIGHT:
-								_direction = DOWN;
-								break;
-							case DOWN:
-								_direction = LEFT;
-								break;
-						}
-					}
-					else
-					{
-						moved = true;
-					}
-				} 
-				while( !moved );
-				break;
-			case WIZARD:
-				do
-				{
-					new_x = rand() % 80;
-					new_y = rand() % 25;
-				} 
-				while( !GameManager::CanMoveTo(new_x, new_y, false) );
-				break;
-			default:
-				break;
-		}
+					    if( !GameManager::CanMoveTo(new_x, new_y, false) )
+					    {
+						    new_x = _position.X;
+						    new_y = _position.Y;
+
+						    switch( _direction )
+						    {
+							    case LEFT:
+								    _direction = UP;
+								    break;
+							    case UP:
+								    _direction = RIGHT;
+								    break;
+							    case RIGHT:
+								    _direction = DOWN;
+								    break;
+							    case DOWN:
+								    _direction = LEFT;
+								    break;
+						    }
+					    }
+					    else
+					    {
+						    moved = true;
+					    }
+				    } 
+				    while( !moved );
+				    break;
+			    case WIZARD:
+				    do
+				    {
+					    new_x = rand() % 80;
+					    new_y = rand() % 25;
+				    } 
+				    while( !GameManager::CanMoveTo(new_x, new_y, false) );
+				    break;
+			    default:
+				    break;
+		    }
+        }
 
 		
 		if( GameManager::CanMoveTo(new_x, new_y, false ) )
@@ -196,7 +215,7 @@ void Enemy::Update(double gameTime)
 		_nextMovement = _moveCount;
 	}
 
-	GameManager::HitPlayer(_position.X,_position.Y);
+	if( GameManager::HitPlayer(_position.X,_position.Y) ) _awayTime = 10;
 	GameObject::Update(gameTime);
 }
 

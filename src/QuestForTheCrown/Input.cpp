@@ -6,6 +6,7 @@ Input instance;
 
 Input::Input()
 {
+    _vibrationTime = 0;
     _controller = new XboxController(1);
 }
 
@@ -59,10 +60,12 @@ char Input::GetControllerInput()
         {
             if( abs( state.Gamepad.sThumbRX ) > abs(state.Gamepad.sThumbRY) )
             {
+                Rumble(15);
                 return state.Gamepad.sThumbRX < 0 ? KEY_LEFT_ACTION : KEY_RIGHT_ACTION;
             }
             else
             {
+                Rumble(15);
                 return state.Gamepad.sThumbRY > 0 ? KEY_DOWN_ACTION : KEY_UP_ACTION;
             }
         }
@@ -78,6 +81,7 @@ char Input::GetControllerInput()
         //PAUSE
         if( state.Gamepad.wButtons & (XINPUT_GAMEPAD_START | XINPUT_GAMEPAD_A) )
         {
+            Rumble(50);
             return KEY_PAUSE;
         }
     }
@@ -113,5 +117,24 @@ char Input::GetInput()
 		return c;
 	}
 
+    if( instance._vibrationTime == 1 )
+    {
+        instance._vibrationTime = 0;
+        instance._controller->Vibrate();
+    }
+    else if ( instance._vibrationTime > 1 )
+    {
+        instance._vibrationTime--;
+    }
+
 	return KEY_NONE;
+}
+
+void Input::Rumble(int intensity)
+{
+    if( instance._controller->IsConnected() )
+    {
+        instance._controller->Vibrate(intensity * 655, intensity * 655);
+        instance._vibrationTime = 17;
+    }
 }

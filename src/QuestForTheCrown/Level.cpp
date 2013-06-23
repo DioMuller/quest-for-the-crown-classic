@@ -95,6 +95,7 @@ void Level::Draw()
 			}
 		}
 
+        gotoxy(0,0);
 		_redraw = false;
 	}
 
