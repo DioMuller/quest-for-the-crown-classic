@@ -8,10 +8,12 @@
 #include <windows.h>
 #include <XInput.h>
 
-// Now, the XInput Library
-// NOTE: COMMENT THIS OUT IF YOU ARE NOT USING
-// A COMPILER THAT SUPPORTS THIS METHOD OF LINKING LIBRARIES
-#pragma comment(lib, "XInput.lib")
+//Imports the XInput library acording to the version.
+#ifdef MSC_VER < 1700 //pre 2012
+    #pragma comment(lib,"Xinput.lib")
+#else
+    #pragma comment(lib,"Xinput9_1_0.lib")
+#endif
 
 // XBOX Controller Class Definition
 class XboxController
@@ -19,6 +21,7 @@ class XboxController
 private:
     XINPUT_STATE _controllerState;
     int _controllerNum;
+    bool _controllerActive;
 public:
     XboxController(int playerNumber);
 

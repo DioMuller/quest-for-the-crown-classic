@@ -1,9 +1,14 @@
 #include "XboxController.h"
+#include <exception>
 
 XboxController::XboxController(int playerNumber)
 {
     // Set the Controller Number
     _controllerNum = playerNumber - 1;
+
+
+    //Could not use most recent version of XInput.
+    _controllerActive = false;
 }
 
 XINPUT_STATE XboxController::GetState()
