@@ -1,6 +1,7 @@
 #include "Input.h"
 #include <stdlib.h>
 #include <conio.h>
+#include <exception>
 
 Input instance;
 
@@ -132,9 +133,17 @@ char Input::GetInput()
 
 void Input::Rumble(int intensity)
 {
-    if( instance._controller->IsConnected() )
+    try
     {
-        instance._controller->Vibrate(intensity * 655, intensity * 655);
-        instance._vibrationTime = 17;
+        if( instance._controller->IsConnected() )
+        {
+            instance._controller->Vibrate(intensity * 655, intensity * 655);
+            instance._vibrationTime = 17;
+        }
+    }
+    catch( std::exception& ex )
+    {
+        //Normaly I wouldn't put an empty catch here, but this it to fix an know rumble bug
+        //that happens randomly on DX10-.
     }
 }

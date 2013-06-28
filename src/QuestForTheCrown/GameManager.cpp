@@ -48,7 +48,8 @@ void GameManager::DrawGame()
 
 	//Draw Level
 	instance->_manager->Draw();
-		
+	
+    mostrar(0,0,FOREGROUND_WHITE, "L");
 	//Draw GUI Bar
     if( instance->_player->GetUpdateGui() )
     {
