@@ -6,6 +6,8 @@
 
 #include "Input.h"
 
+#include <time.h>
+
 int main(int argc, char **argv)
 {
 	bool running = true;
@@ -13,11 +15,18 @@ int main(int argc, char **argv)
 	while(running)
 	{
 		TitleScreen::Draw();
+        clock_t t1, t2;
+        int time_ms;
+
         Option opt = OPTION_NONE;
 		while( opt == OPTION_NONE )
         {
+            t1 = clock();
             opt = TitleScreen::UpdateDraw();
-            Sleep(17);
+            t2 = clock();
+            time_ms = (t2-t1);
+
+            Sleep(17 - time_ms);
         }
 
         if( opt == OPTION_NEWGAME )
@@ -27,10 +36,13 @@ int main(int argc, char **argv)
 
 		    while( GameManager::IsRunning() )
 		    {	
+                t1 = clock();
 			    GameManager::UpdateGame();
 			    GameManager::DrawGame();
+                t2 = clock();
+                time_ms = (t2-t1);
 
-			    Sleep(17);
+			    Sleep(max(17 - time_ms,0)); //Poor mans substitute for gameTime. At least it doesn't make the Draw() function more complicated.
 		    }
 
 		    //Game Over Loop

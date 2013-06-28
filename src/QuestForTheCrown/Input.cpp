@@ -133,17 +133,9 @@ char Input::GetInput()
 
 void Input::Rumble(int intensity)
 {
-    try
+    if( instance._controller->IsConnected() )
     {
-        if( instance._controller->IsConnected() )
-        {
-            instance._controller->Vibrate(intensity * 655, intensity * 655);
-            instance._vibrationTime = 17;
-        }
-    }
-    catch( std::exception& ex )
-    {
-        //Normaly I wouldn't put an empty catch here, but this it to fix an know rumble bug
-        //that happens randomly on DX10-.
+        instance._controller->Vibrate(intensity * 655, intensity * 655);
+        instance._vibrationTime = 17;
     }
 }

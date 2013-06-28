@@ -3,17 +3,16 @@
 
 // No MFC
 #define WIN32_LEAN_AND_MEAN
-
 // We need the Windows Header and the XInput Header
 #include <windows.h>
 #include <XInput.h>
-
 //Imports the XInput library acording to the version.
-#ifdef MSC_VER < 1700 //pre 2012
-    #pragma comment(lib,"Xinput.lib")
-#else
-    #pragma comment(lib,"Xinput9_1_0.lib")
-#endif
+//Pre-VS2012
+//#ifdef MSC_VER < 1700
+#pragma comment(lib,"Xinput.lib")
+//#else
+//#pragma comment(lib,"XInput9_1_0.lib")
+//#endif
 
 // XBOX Controller Class Definition
 class XboxController
