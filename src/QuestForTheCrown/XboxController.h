@@ -9,9 +9,9 @@
 //Imports the XInput library acording to the version.
 //Pre-VS2012
 //#ifdef MSC_VER < 1700
-#pragma comment(lib,"Xinput.lib")
+#pragma comment(lib,"XINPUT.LIB")
 //#else
-//#pragma comment(lib,"XInput9_1_0.lib")
+//#pragma comment(lib,"XINPUT9_1_0.LIB")
 //#endif
 
 // XBOX Controller Class Definition
