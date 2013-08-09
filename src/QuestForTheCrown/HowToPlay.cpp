@@ -1,4 +1,4 @@
-#include "HowToPlay.h"
+#include "HowToPlay.hpp"
 #include "Console.h"
 
 void HowToPlay::Draw()

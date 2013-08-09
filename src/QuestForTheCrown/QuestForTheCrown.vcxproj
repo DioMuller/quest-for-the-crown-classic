@@ -21,7 +21,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -85,9 +85,9 @@
     <ClInclude Include="Enum.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameOver.hpp" />
     <ClInclude Include="Helpers.h" />
-    <ClInclude Include="HowToPlay.h" />
+    <ClInclude Include="HowToPlay.hpp" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
@@ -95,8 +95,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="TitleScreen.h" />
-    <ClInclude Include="Maps.h" />
-    <ClInclude Include="VictoryScreen.h" />
+    <ClInclude Include="Maps.hpp" />
+    <ClInclude Include="VictoryScreen.hpp" />
     <ClInclude Include="Waypoint.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponPart.h" />

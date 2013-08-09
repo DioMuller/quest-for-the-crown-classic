@@ -1,4 +1,4 @@
-#include "GameOver.h"
+#include "GameOver.hpp"
 #include "Console.h"
 
 void GameOver::Draw()

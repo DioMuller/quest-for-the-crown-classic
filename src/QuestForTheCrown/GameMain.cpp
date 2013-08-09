@@ -1,8 +1,8 @@
 #include "TitleScreen.h"
 #include "GameManager.h"
-#include "GameOver.h"
-#include "VictoryScreen.h"
-#include "HowToPlay.h"
+#include "GameOver.hpp"
+#include "VictoryScreen.hpp"
+#include "HowToPlay.hpp"
 
 #include "Input.h"
 

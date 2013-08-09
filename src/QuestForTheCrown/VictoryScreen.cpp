@@ -1,4 +1,4 @@
-#include "VictoryScreen.h"
+#include "VictoryScreen.hpp"
 #include "Console.h"
 
 void VictoryScreen::Draw()

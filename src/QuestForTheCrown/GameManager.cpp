@@ -1,6 +1,6 @@
 #include "GameManager.h"
 #include "Helpers.h"
-#include "Maps.h"
+#include "Maps.hpp"
 
 GameManager* instance;
 
